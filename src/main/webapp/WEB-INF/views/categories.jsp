@@ -5,8 +5,16 @@
     <title>Categories</title>
 </head>
 <body>
-    <c:forEach var="e" items="${categories}">
-        <h1><c:out value="${e.name}"/></h1>
-    </c:forEach>
+<form method="post">
+    Find category by id:<br>
+    <input type="text" name="findbyid"><br>
+    <input type="submit" value="Submit">
+</form>
+<c:forEach var="e" items="${categories}">
+    <a href="${pageContext.request.contextPath}/products?category=<c:out value="${e.name}"/>"
+       style="font-size: 20px"><c:out
+            value="${e.name}"/></a>
+</c:forEach><br>
+<a href="${pageContext.request.contextPath}/" style="position: relative;bottom: -40px;">Back</a><br>
 </body>
 </html>

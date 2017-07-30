@@ -1,6 +1,6 @@
-package com.akhambir.dao;
+package com.odmytrenko.dao;
 
-import com.akhambir.model.Category;
+import com.odmytrenko.model.Category;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,22 +18,27 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
 
     @Override
     public Category create(Category category) {
-        return null;
+        category.setId(categoryList.get(categoryList.size() - 1).getId() + 1);
+        categoryList.add(category);
+        return category;
     }
 
     @Override
     public Category delete(Category category) {
-        return null;
+        categoryList.remove(category);
+        return category;
     }
 
     @Override
     public Category update(Category category) {
-        return null;
+        categoryList.removeIf(i -> i.getName().equals(category.getName()));
+        categoryList.add(category);
+        return category;
     }
 
     @Override
     public Category findById(Long id) {
-        return null;
+        return categoryList.get(id.intValue() - 1);
     }
 
     @Override

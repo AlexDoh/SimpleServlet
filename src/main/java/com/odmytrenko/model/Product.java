@@ -1,10 +1,18 @@
-package com.akhambir.model;
+package com.odmytrenko.model;
 
 public class Product {
 
     private Long id;
     private String name;
     private String description;
+    private String categoryName;
+
+    public Product(Long id, String name, String description, String categoryName) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.categoryName = categoryName;
+    }
 
     public Long getId() {
         return id;
@@ -28,5 +36,13 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

@@ -1,4 +1,4 @@
-package com.akhambir.model;
+package com.odmytrenko.model;
 
 import java.util.List;
 

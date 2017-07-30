@@ -1,6 +1,6 @@
-package com.akhambir.controller;
+package com.odmytrenko.controller;
 
-import com.akhambir.service.CategoryService;
+import com.odmytrenko.service.CategoryService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +15,7 @@ public class GetAllCategoriesController {
         this.categoryService = categoryService;
     }
 
-    public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void getAllCategories(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("categories", categoryService.getAll());
-        request.getRequestDispatcher("/WEB-INF/views/categories.jsp").forward(request, response);
     }
 }

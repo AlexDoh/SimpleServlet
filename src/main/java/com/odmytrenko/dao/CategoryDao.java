@@ -1,6 +1,6 @@
-package com.akhambir.dao;
+package com.odmytrenko.dao;
 
-import com.akhambir.model.Category;
+import com.odmytrenko.model.Category;
 
 import java.util.List;
 

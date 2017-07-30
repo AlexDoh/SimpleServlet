@@ -1,6 +1,5 @@
-package com.akhambir.dao;
+package com.odmytrenko.dao;
 
 public abstract class AbstractDao<T> implements GenericDao<T> {
-
 
 }

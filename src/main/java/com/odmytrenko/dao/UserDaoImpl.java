@@ -1,9 +1,9 @@
-package com.akhambir.dao;
+package com.odmytrenko.dao;
 
-import com.akhambir.model.User;
+import com.odmytrenko.model.User;
 
 import java.util.HashSet;
-
+import java.util.Iterator;
 import java.util.Set;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
@@ -17,6 +17,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     public User getUser(User user) {
+        userList.forEach(i -> System.out.println(i.getName()));
         if (userList.contains(user)) {
             return user;
         } else {
@@ -26,17 +27,23 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public User create(User user) {
-        return null;
+        userList.add(user);
+        userList.forEach(i -> System.out.println(i.getName()));
+        return user;
     }
 
     @Override
     public User delete(User user) {
-        return null;
+        userList.remove(user);
+        userList.forEach(i -> System.out.println(i.getName()));
+        return user;
     }
 
     @Override
     public User update(User user) {
-        return null;
+        userList.removeIf(i -> i.getName().equals(user.getName()));
+        userList.add(user);
+        return user;
     }
 
     @Override

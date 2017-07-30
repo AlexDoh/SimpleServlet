@@ -7,10 +7,10 @@
 <body>
 
     <form method="post" action="<c:url value="/login"/>">
-
-        <input title="Username" type="text" name="userName">
-
-        <input title="Password" type="password" name="password">
+        Username:
+        <input title="Username" type="text" name="userName" style="position: relative;top: -5px"><br>
+        Password:
+        <input title="Password" type="password" name="userPassword"><br>
 
         <button type="submit">LogIn</button>
     </form>

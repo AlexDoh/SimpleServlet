@@ -1,4 +1,4 @@
-package com.akhambir.dao;
+package com.odmytrenko.dao;
 
 public interface GenericDao<T> {
 
