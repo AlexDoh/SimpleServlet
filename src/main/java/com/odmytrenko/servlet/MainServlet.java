@@ -67,7 +67,7 @@ public class MainServlet extends HttpServlet {
         }
 
         if (request.getRequestURI().equals(management.getProductsJSP())) {
-            getAllProductsController.getAllProducts(request, response, request.getParameter("category"));
+            getAllProductsController.getAllProducts(request, response, request.getParameter(management.getParametrCategory()));
             request.getRequestDispatcher(products).forward(request, response);
         }
 
@@ -85,7 +85,7 @@ public class MainServlet extends HttpServlet {
 
         if (request.getRequestURI().equals(management.getCategoriesJSP())) {
             try {
-                categoryController.findById(request, response, Long.parseLong(request.getParameter("findbyid")));
+                categoryController.findById(request, response, Long.parseLong(request.getParameter(management.getParametrFindById())));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -94,7 +94,8 @@ public class MainServlet extends HttpServlet {
 
         if (request.getRequestURI().equals(management.getProductsJSP())) {
             try {
-                productController.findByIdAndCategoryName(request, response, Long.parseLong(request.getParameter("findbyid")), request.getParameter("category"));
+                productController.findByIdAndCategoryName(request, response, Long.parseLong(request.getParameter
+                        (management.getParametrFindById())), request.getParameter(management.getParametrCategory()));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -102,25 +103,43 @@ public class MainServlet extends HttpServlet {
         }
 
         if (request.getRequestURI().equals(management.getAdminJSP())) {
-            if(request.getParameterMap().containsKey("useraction")) {
-                switch (request.getParameter("useraction")) {
-                    case "add" : userController.create(request, response); break;
-                    case "delete" : userController.delete(request, response); break;
-                    case "update" : userController.update(request, response); break;
+            if (request.getParameterMap().containsKey(management.getParametrUserAction())) {
+                switch (request.getParameter(management.getParametrUserAction())) {
+                    case "add":
+                        userController.create(request, response);
+                        break;
+                    case "delete":
+                        userController.delete(request, response);
+                        break;
+                    case "update":
+                        userController.update(request, response);
+                        break;
                 }
             }
-            if(request.getParameterMap().containsKey("categoryaction")) {
-                switch (request.getParameter("categoryaction")) {
-                    case "add" : categoryController.create(request, response); break;
-                    case "delete" : categoryController.delete(request, response); break;
-                    case "update" : categoryController.update(request, response); break;
+            if (request.getParameterMap().containsKey(management.getParametrCategoryAction())) {
+                switch (request.getParameter(management.getParametrCategoryAction())) {
+                    case "add":
+                        categoryController.create(request, response);
+                        break;
+                    case "delete":
+                        categoryController.delete(request, response);
+                        break;
+                    case "update":
+                        categoryController.update(request, response);
+                        break;
                 }
             }
-            if(request.getParameterMap().containsKey("productaction")) {
-                switch (request.getParameter("productaction")) {
-                    case "add" : productController.create(request, response); break;
-                    case "delete" : productController.delete(request, response); break;
-                    case "update" : productController.update(request, response); break;
+            if (request.getParameterMap().containsKey(management.getParametrProductAction())) {
+                switch (request.getParameter(management.getParametrProductAction())) {
+                    case "add":
+                        productController.create(request, response);
+                        break;
+                    case "delete":
+                        productController.delete(request, response);
+                        break;
+                    case "update":
+                        productController.update(request, response);
+                        break;
                 }
             }
             request.getRequestDispatcher(adminAction).forward(request, response);
