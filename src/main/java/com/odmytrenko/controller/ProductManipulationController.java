@@ -19,6 +19,6 @@ public class ProductManipulationController implements Controller {
         String description = request.getParameter("productDescription");
         String categoryName = request.getParameter("productCategoryName");
 
-        return CrudController.process(request, productService, new Product(null, name, description, categoryName));
+        return CrudController.process(request, productService, new Product(name, description, categoryName));
     }
 }

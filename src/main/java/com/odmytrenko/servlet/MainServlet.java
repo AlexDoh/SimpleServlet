@@ -5,10 +5,7 @@ import com.odmytrenko.factory.Factory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,18 +16,18 @@ public class MainServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        controllerMap.put(Request.create("GET", "/"), Factory.getIndexController());
-        controllerMap.put(Request.create("GET", "/login"), Factory.getLoginController());
-        controllerMap.put(Request.create("GET", "/profile"), Factory.getLoginController());
-        controllerMap.put(Request.create("POST", "/profile"), Factory.getProfileController());
-        controllerMap.put(Request.create("GET", "/categories"), Factory.getAllCategoriesController());
-        controllerMap.put(Request.create("GET", "/products"), Factory.getAllProductsController());
-        controllerMap.put(Request.create("GET", "/category"), Factory.getCategoryController());
-        controllerMap.put(Request.create("POST", "/category"), Factory.getCategoryController());
-        controllerMap.put(Request.create("GET", "/product"), Factory.getProductController());
-        controllerMap.put(Request.create("POST", "/product"), Factory.getProductController());
-        controllerMap.put(Request.create("GET", "/adminconsole"), Factory.getAdminController());
-        controllerMap.put(Request.create("POST", "/performedadminaction"), Factory.getManipulationController());
+        controllerMap.put(Request.create("GET", "/filter/"), Factory.getIndexController());
+        controllerMap.put(Request.create("GET", "/filter/login"), Factory.getLoginController());
+        controllerMap.put(Request.create("GET", "/filter/profile"), Factory.getLoginController());
+        controllerMap.put(Request.create("POST", "/filter/profile"), Factory.getProfileController());
+        controllerMap.put(Request.create("GET", "/filter/categories"), Factory.getAllCategoriesController());
+        controllerMap.put(Request.create("GET", "/filter/products"), Factory.getAllProductsController());
+        controllerMap.put(Request.create("GET", "/filter/category"), Factory.getCategoryController());
+        controllerMap.put(Request.create("POST", "/filter/category"), Factory.getCategoryController());
+        controllerMap.put(Request.create("GET", "/filter/product"), Factory.getProductController());
+        controllerMap.put(Request.create("POST", "/filter/product"), Factory.getProductController());
+        controllerMap.put(Request.create("GET", "/filter/adminconsole"), Factory.getAdminController());
+        controllerMap.put(Request.create("POST", "/filter/performedadminaction"), Factory.getManipulationController());
     }
 
     @Override
@@ -57,7 +54,10 @@ public class MainServlet extends HttpServlet {
             if (vm.hasCookie()) {
                 Map<String, String> newCookie = vm.getNewCookie();
                 for (String cookieName : newCookie.keySet()) {
-                    response.addCookie(new Cookie(cookieName, newCookie.get(cookieName)));
+                    Cookie cookie = new Cookie(cookieName, newCookie.get(cookieName));
+                    cookie.setMaxAge(3600 * 24 * 30);
+                    cookie.setPath("/");
+                    response.addCookie(cookie);
                 }
             }
 

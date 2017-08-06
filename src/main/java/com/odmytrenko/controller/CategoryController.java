@@ -15,7 +15,8 @@ public class CategoryController implements Controller {
     @Override
     public ViewModel process(Request request) {
         try {
-            return new ViewModel("category").addAttribute("category", categoryService.findById(Long.parseLong(request.getParameter("id"))));
+            return new ViewModel("category").addAttribute("category", categoryService.
+                    findById(Long.parseLong(request.getParameter("id"))));
         } catch (NumberFormatException e) {
             throw new RuntimeException("Invalid id, please specify correct number of id");
         } catch (IndexOutOfBoundsException e) {

@@ -1,33 +1,14 @@
 package com.odmytrenko.model;
 
-public class Product implements Model {
+public class Product extends Model {
 
-    private Long id;
-    private String name;
     private String description;
     private String categoryName;
 
-    public Product(Long id, String name, String description, String categoryName) {
-        this.id = id;
+    public Product(String name, String description, String categoryName) {
         this.name = name;
         this.description = description;
         this.categoryName = categoryName;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {

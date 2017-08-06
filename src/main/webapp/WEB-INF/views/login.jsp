@@ -5,13 +5,13 @@
     <title>Login</title>
 </head>
 <body>
-<form method="post" action="<c:url value="/profile"/>">
+<form method="POST" action="<c:url value="/filter/profile"/>">
     Username:
     <input title="Username" type="text" name="userName" style="position: relative;top: -5px"><br>
     Password:
     <input title="Password" type="password" name="userPassword"><br>
     <button type="submit">LogIn</button>
 </form>
-<a href="${pageContext.request.contextPath}/" style="position: relative;bottom: -40px;">Back to main page</a>
+<a href="${pageContext.request.contextPath}/filter/" style="position: relative;bottom: -40px;">Back to main page</a>
 </body>
 </html>

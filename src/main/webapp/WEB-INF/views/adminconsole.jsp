@@ -7,7 +7,7 @@
 <body>
 <h1>Hello, Admin!</h1>
 <h3>User manipulation:</h3>
-<form method="post" action="<c:url value="/performedadminaction"/>">
+<form method="POST" action="<c:url value="/filter/performedadminaction"/>">
     <input type="hidden" name="type" value="User" />
     <ul style="list-style: none">
         <li>Choose user operation:
@@ -23,7 +23,7 @@
     <input type="submit" value="Submit" style="position: relative;bottom: 20px">
 </form>
 <h3>Category manipulation:</h3>
-<form method="post" action="<c:url value="/performedadminaction"/>">
+<form method="POST" action="<c:url value="/filter/performedadminaction"/>">
     <input type="hidden" name="type" value="Category" />
     <ul style="list-style: none">
         <li>Choose category operation:
@@ -37,7 +37,7 @@
     <input type="submit" value="Submit" style="position: relative;bottom: 20px">
 </form>
 <h3>Product manipulation:</h3>
-<form method="post" action="<c:url value="/performedadminaction"/>">
+<form method="POST" action="<c:url value="/filter/performedadminaction"/>">
     <input type="hidden" name="type" value="Product" />
     <ul style="list-style: none">
         <li>Choose product operation:
@@ -54,6 +54,6 @@
     <br>
     <input type="submit" value="Submit" style="position: relative;bottom: 20px">
 </form>
-<a href="${pageContext.request.contextPath}/" style="position: relative;bottom: -40px;">Back</a><br>
+<a href="${pageContext.request.contextPath}/filter/" style="position: relative;bottom: -40px;">Back</a><br>
 </body>
 </html>

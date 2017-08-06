@@ -10,17 +10,35 @@ public class ProductDaoImpl extends AbstractDao<Product> implements ProductDao {
 
     static {
         List<Product> productListForShoes = new ArrayList<>();
-        productListForShoes.add(new Product(1L, "Low shoe", "HighQualifiedProduct", "Shoes"));
-        productListForShoes.add(new Product(2L, "Sandals", "MiddleQualifiedProduct", "Shoes"));
-        productListForShoes.add(new Product(3L, "Boots", "LowQualifiedProduct", "Shoes"));
+        Product product1 = new Product("Low shoe", "HighQualifiedProduct", "Shoes");
+        product1.setId(1L);
+        Product product2 = new Product("Sandals", "MiddleQualifiedProduct", "Shoes");
+        product2.setId(2L);
+        Product product3 = new Product("Boots", "LowQualifiedProduct", "Shoes");
+        product3.setId(3L);
+        productListForShoes.add(product1);
+        productListForShoes.add(product2);
+        productListForShoes.add(product3);
         List<Product> productListForDresses = new ArrayList<>();
-        productListForDresses.add(new Product(1L, "Shift", "HighQualifiedProduct", "Dresses"));
-        productListForDresses.add(new Product(2L, "Doll", "MiddleQualifiedProduct", "Dresses"));
-        productListForDresses.add(new Product(3L, "Kimono", "LowQualifiedProduct", "Dresses"));
+        Product product4 = new Product("Shift", "HighQualifiedProduct", "Dresses");
+        product1.setId(1L);
+        Product product5 = new Product("Doll", "MiddleQualifiedProduct", "Dresses");
+        product2.setId(2L);
+        Product product6 = new Product("Kimono", "LowQualifiedProduct", "Dresses");
+        product3.setId(3L);
+        productListForDresses.add(product4);
+        productListForDresses.add(product5);
+        productListForDresses.add(product6);
         List<Product> productListForPants = new ArrayList<>();
-        productListForPants.add(new Product(1L, "Breeches", "HighQualifiedProduct", "Pants"));
-        productListForPants.add(new Product(2L, "Trousers", "MiddleQualifiedProduct", "Pants"));
-        productListForPants.add(new Product(3L, "Drawers", "LowQualifiedProduct", "Pants"));
+        Product product7 = new Product("Breeches", "HighQualifiedProduct", "Pants");
+        product1.setId(1L);
+        Product product8 = new Product("Trousers", "MiddleQualifiedProduct", "Pants");
+        product2.setId(2L);
+        Product product9 = new Product("Drawers", "LowQualifiedProduct", "Pants");
+        product3.setId(3L);
+        productListForPants.add(product7);
+        productListForPants.add(product8);
+        productListForPants.add(product9);
 
         productMap.put("Shoes", productListForShoes);
         productMap.put("Dresses", productListForDresses);

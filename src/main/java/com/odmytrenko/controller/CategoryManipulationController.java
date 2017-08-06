@@ -17,6 +17,6 @@ public class CategoryManipulationController implements Controller {
     public ViewModel process(Request request) {
         String categoryName = request.getParameter("categoryName");
 
-        return CrudController.process(request, categoryService, new Category(null, categoryName, null));
+        return CrudController.process(request, categoryService, new Category(categoryName));
     }
 }

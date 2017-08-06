@@ -10,11 +10,11 @@ public class Factory {
         return new UserManipulationController(Factory.getUserService());
     }
 
-    private static UserService getUserService() {
+    public static UserService getUserService() {
         return new UserServiceImpl(Factory.getUserDao());
     }
 
-    private static UserDao getUserDao() {
+    public static UserDao getUserDao() {
         return new UserDaoImpl();
     }
 

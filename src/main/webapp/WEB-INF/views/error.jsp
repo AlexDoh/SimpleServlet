@@ -7,6 +7,6 @@
 <body>
 <h1>Error</h1>
 <h3 style="position: relative;bottom: -20px;">Message : <c:out value="${error}"/></h3>
-<a href="${pageContext.request.contextPath}/" style="position: relative;bottom: -40px;">Back to main page</a>
+<a href="${pageContext.request.contextPath}/filter/" style="position: relative;bottom: -40px;">Back to main page</a>
 </body>
 </html>

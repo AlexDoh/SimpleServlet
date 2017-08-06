@@ -11,9 +11,12 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
     private static List<Category> categoryList = new ArrayList<>();
 
     static {
-        categoryList.add(new Category(1L, "Shoes", null));
-        categoryList.add(new Category(2L, "Dresses", null));
-        categoryList.add(new Category(3L, "Pants", null));
+        Category category1 = new Category("Shoes");
+        Category category2 = new Category("Dresses");
+        Category category3 = new Category("Pants");
+        categoryList.add(category1);
+        categoryList.add(category2);
+        categoryList.add(category3);
     }
 
 

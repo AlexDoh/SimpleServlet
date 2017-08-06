@@ -6,6 +6,10 @@
 </head>
 <body>
 <h3>Hello <c:out value="${user.name}"/>!!!</h3>
-<a href="${pageContext.request.contextPath}/" style="position: relative;bottom: -40px;">Back to main page</a>
+<form method="GET" action="<c:url value="/filter/"/>">
+    <button name="logout" style="position: relative;bottom: -40px;">LogOut</button>
+</form>
+<br>
+<a href="${pageContext.request.contextPath}/filter/" style="position: relative;bottom: -60px;">Back to main page</a>
 </body>
 </html>

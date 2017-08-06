@@ -11,31 +11,45 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     private static final Set<User> userList = new HashSet<>();
 
     static {
-        userList.add(new User("Vova", "123123"));
-        userList.add(new User("Vova2", "123123"));
-        userList.add(new User("Anton", "123123"));
+        User user1 = new User("Vova", "123123");
+        user1.setToken("token1");
+        User user2 = new User("Vova2", "123123");
+        user2.setToken("token2");
+        User user3 = new User("Anton", "123123");
+        user3.setToken("token3");
+        userList.add(user1);
+        userList.add(user2);
+        userList.add(user3);
     }
 
     public User getUser(User user) {
-        userList.forEach(i -> System.out.println(i.getName()));
-        if (userList.contains(user)) {
-            return user;
-        } else {
-            return null;
+        for(User userDB : userList) {
+            if(userDB.equals(user)) {
+                return userDB;
+            }
         }
+        return null;
+    }
+
+    @Override
+    public User findByToken(String token) {
+        for(User user : userList) {
+            if(user.getToken().equals(token)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     @Override
     public User create(User user) {
         userList.add(user);
-        userList.forEach(i -> System.out.println(i.getName()));
         return user;
     }
 
     @Override
     public User delete(User user) {
         userList.remove(user);
-        userList.forEach(i -> System.out.println(i.getName()));
         return user;
     }
 

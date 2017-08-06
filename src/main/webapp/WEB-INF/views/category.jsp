@@ -5,13 +5,13 @@
     <title>CategorySearch</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/products?category=<c:out value="${category.name}"/>"
+<a href="${pageContext.request.contextPath}/filter/products?category=<c:out value="${category.name}"/>"
    style="font-size: 20px"><c:out
         value="${category.name}"/></a><br>
 <h3 style="position: relative;bottom: -20px;">This category can be found by link :</h3><br>
-<a href="${pageContext.request.contextPath}/category?id=${category.id}"><c:out
+<a href="${pageContext.request.contextPath}/filter/category?id=${category.id}"><c:out
         value="${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}
-        /category?id=${category.id}"/></a><br>
-<a href="${pageContext.request.contextPath}/categories" style="position: relative;bottom: -40px;">Back</a><br>
+        /filter/category?id=${category.id}"/></a><br>
+<a href="${pageContext.request.contextPath}/filter/categories" style="position: relative;bottom: -40px;">Back</a><br>
 </body>
 </html>

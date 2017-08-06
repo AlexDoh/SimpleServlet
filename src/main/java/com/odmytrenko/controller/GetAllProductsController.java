@@ -14,6 +14,7 @@ public class GetAllProductsController implements Controller {
 
     @Override
     public ViewModel process(Request request) {
-        return new ViewModel("products").addAttribute("products", productService.getAllProductsByCategory(request.getParameter("category")));
+        return new ViewModel("products").addAttribute("products", productService.
+                getAllProductsByCategory(request.getParameter("category")));
     }
 }

@@ -1,21 +1,14 @@
 package com.odmytrenko.model;
 
-public class User implements Model {
+public class User extends Model {
 
-    private String name;
     private String password;
+    private String token;
+    private String email;
 
     public User(String userName, String password) {
         this.name = userName;
         this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPassword() {
@@ -26,21 +19,44 @@ public class User implements Model {
         this.password = password;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof User)) return false;
 
         User user = (User) o;
 
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        return password != null ? password.equals(user.password) : user.password == null;
+        if (getId() != null ? !getId().equals(user.getId()) : user.getId() != null)
+            return false;
+        if (getName() != null ? !getName().equals(user.getName()) : user.getName() != null)
+            return false;
+        if (getPassword() != null ? !getPassword().equals(user.getPassword()) : user.getPassword() != null)
+            return false;
+        return getEmail() != null ? getEmail().equals(user.getEmail()) : user.getEmail() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (password != null ? password.hashCode() : 0);
+        int result = getPassword() != null ? getPassword().hashCode() : 0;
+        result = 31 * result + (getId() != null ? getId().hashCode() : 0);
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
         return result;
     }
 }

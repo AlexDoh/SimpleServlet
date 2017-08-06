@@ -5,7 +5,7 @@
     <title>Categories</title>
 </head>
 <body>
-<form method="post" action="<c:url value="/category"/>">
+<form method="POST" action="<c:url value="/filter/category"/>">
     Find category by id:<br>
     <input type="text" name="id"><br>
     <input type="submit" value="Submit">
@@ -15,6 +15,6 @@
        style="font-size: 20px"><c:out
             value="${e.name}"/></a>
 </c:forEach><br>
-<a href="${pageContext.request.contextPath}/" style="position: relative;bottom: -40px;">Back</a><br>
+<a href="${pageContext.request.contextPath}/filter/" style="position: relative;bottom: -40px;">Back</a><br>
 </body>
 </html>

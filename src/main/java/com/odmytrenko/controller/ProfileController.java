@@ -7,10 +7,10 @@ import com.odmytrenko.servlet.ViewModel;
 
 public class ProfileController implements Controller {
 
-    private final UserService service;
+    private final UserService userService;
 
     public ProfileController(UserService service) {
-        this.service = service;
+        this.userService = service;
     }
 
     @Override
@@ -18,9 +18,7 @@ public class ProfileController implements Controller {
 
         String userName = request.getParameter("userName");
         String password = request.getParameter("userPassword");
-        String token = userName + System.nanoTime();
-        User user = service.getUser(new User(userName, password));
-        return new ViewModel("profile")
-                .addCookie("token", token).addAttribute("user", user);
+        User user = userService.getUser(new User(userName, password));
+        return new ViewModel("profile").addCookie("token", user.getToken()).addAttribute("user", user);
     }
 }

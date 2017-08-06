@@ -17,7 +17,8 @@ public class UserManipulationController implements Controller {
     public ViewModel process(Request request) {
         String userName = request.getParameter("userName");
         String password = request.getParameter("userPassword");
-
-        return CrudController.process(request, userService, new User(userName, password));
+        User user = new User(userName, password);
+        user.setToken(userName + + System.nanoTime());
+        return CrudController.process(request, userService, user);
     }
 }
