@@ -2,7 +2,7 @@ package com.odmytrenko.model;
 
 import java.util.List;
 
-public class Category {
+public class Category implements Model {
 
     private Long id;
     private String name;

@@ -5,11 +5,11 @@
     <title>Products</title>
 </head>
 <body>
-<form method="post">
+<form method="post" action="<c:url value="/product"/>">
     Find product by id:
-    <input title="Find product by id:" type="text" name="findbyid" style="position: relative;top: -5px"><br>
+    <input title="Find product by id:" type="text" name="id" style="position: relative;top: -5px"><br>
     Category of product:
-    <input title="Category of product:" type="text" name="findbyid" value="<%= request.getParameter("category") %>"><br>
+    <input title="Category of product:" type="text" name="category" value="<%= request.getParameter("category") %>"><br>
     <input type="submit" value="Submit" style="position: relative;bottom: -10px">
 </form>
 <c:forEach var="e" items="${products}">

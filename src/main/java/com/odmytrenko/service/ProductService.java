@@ -4,7 +4,7 @@ import com.odmytrenko.model.Product;
 
 import java.util.List;
 
-public interface ProductService {
+public interface ProductService extends CrudService<Product> {
 
     List<Product> getAllProductsByCategory(String categoryName);
 

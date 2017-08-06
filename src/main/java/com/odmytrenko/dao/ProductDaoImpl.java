@@ -2,10 +2,7 @@ package com.odmytrenko.dao;
 
 import com.odmytrenko.model.Product;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ProductDaoImpl extends AbstractDao<Product> implements ProductDao {
 
@@ -47,6 +44,12 @@ public class ProductDaoImpl extends AbstractDao<Product> implements ProductDao {
 
     @Override
     public Product create(Product product) {
+        if (productMap.get(product.getCategoryName()) != null) {
+            product.setId((productMap.get(product.getCategoryName()).stream().max(Comparator.comparing(Product::getId)).get().getId()) + 1);
+        } else {
+            productMap.put(product.getCategoryName(), new ArrayList<>());
+            product.setId(1L);
+        }
         productMap.get(product.getCategoryName()).add(product);
         return product;
     }

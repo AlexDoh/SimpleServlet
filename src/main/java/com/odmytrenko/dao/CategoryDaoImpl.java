@@ -3,6 +3,7 @@ package com.odmytrenko.dao;
 import com.odmytrenko.model.Category;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDao {
@@ -18,7 +19,7 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
 
     @Override
     public Category create(Category category) {
-        category.setId(categoryList.get(categoryList.size() - 1).getId() + 1);
+        category.setId(categoryList.stream().max(Comparator.comparing(Category::getId)).get().getId() + 1);
         categoryList.add(category);
         return category;
     }

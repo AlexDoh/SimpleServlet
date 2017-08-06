@@ -5,9 +5,9 @@
     <title>Categories</title>
 </head>
 <body>
-<form method="post">
+<form method="post" action="<c:url value="/category"/>">
     Find category by id:<br>
-    <input type="text" name="findbyid"><br>
+    <input type="text" name="id"><br>
     <input type="submit" value="Submit">
 </form>
 <c:forEach var="e" items="${categories}">

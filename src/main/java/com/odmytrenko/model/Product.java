@@ -1,6 +1,6 @@
 package com.odmytrenko.model;
 
-public class Product {
+public class Product implements Model {
 
     private Long id;
     private String name;

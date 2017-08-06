@@ -1,6 +1,6 @@
 package com.odmytrenko.model;
 
-public class User {
+public class User implements Model {
 
     private String name;
     private String password;

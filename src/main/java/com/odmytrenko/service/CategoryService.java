@@ -4,7 +4,7 @@ import com.odmytrenko.model.Category;
 
 import java.util.List;
 
-public interface CategoryService {
+public interface CategoryService extends CrudService<Category> {
 
     List<Category> getAll();
 

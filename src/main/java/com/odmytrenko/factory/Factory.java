@@ -6,8 +6,8 @@ import com.odmytrenko.service.*;
 
 public class Factory {
 
-    public static UserController getUserController() {
-        return new UserController(Factory.getUserService());
+    public static UserManipulationController getUserController() {
+        return new UserManipulationController(Factory.getUserService());
     }
 
     private static UserService getUserService() {
@@ -48,5 +48,37 @@ public class Factory {
 
     public static ProductController getProductController() {
         return new ProductController(Factory.getProductService());
+    }
+
+    public static Controller getIndexController() {
+        return new IndexController();
+    }
+
+    public static Controller getLoginController() {
+        return new LoginController();
+    }
+
+    public static Controller getProfileController() {
+        return new ProfileController(Factory.getUserService());
+    }
+
+    public static Controller getAdminController() {
+        return new AdminController();
+    }
+
+    public static Controller getManipulationController() {
+        return new ManipulationController();
+    }
+
+    public static Controller getUserManipulationController() {
+        return new UserManipulationController(Factory.getUserService());
+    }
+
+    public static Controller getCategoryManipulationController() {
+        return new CategoryManipulationController(Factory.getCategoryService());
+    }
+
+    public static Controller getProductManipulationController() {
+        return new ProductManipulationController(Factory.getProductService());
     }
 }

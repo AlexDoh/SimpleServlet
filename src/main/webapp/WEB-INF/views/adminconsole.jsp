@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -6,10 +7,11 @@
 <body>
 <h1>Hello, Admin!</h1>
 <h3>User manipulation:</h3>
-<form method="post">
+<form method="post" action="<c:url value="/performedadminaction"/>">
+    <input type="hidden" name="type" value="User" />
     <ul style="list-style: none">
         <li>Choose user operation:
-            <input title="User action" type="text" name="useraction" style="position: relative;top: -5px">
+            <input title="User action" type="text" name="action" style="position: relative;top: -5px">
             (e.g. update, delete, add)
         </li>
         <li>User name:
@@ -21,10 +23,11 @@
     <input type="submit" value="Submit" style="position: relative;bottom: 20px">
 </form>
 <h3>Category manipulation:</h3>
-<form method="post">
+<form method="post" action="<c:url value="/performedadminaction"/>">
+    <input type="hidden" name="type" value="Category" />
     <ul style="list-style: none">
         <li>Choose category operation:
-            <input title="Category action" type="text" name="categoryaction" style="position: relative;top: -5px">
+            <input title="Category action" type="text" name="action" style="position: relative;top: -5px">
             (e.g. update, delete, add)
         </li>
         <li>Category name:
@@ -34,10 +37,11 @@
     <input type="submit" value="Submit" style="position: relative;bottom: 20px">
 </form>
 <h3>Product manipulation:</h3>
-<form method="post">
+<form method="post" action="<c:url value="/performedadminaction"/>">
+    <input type="hidden" name="type" value="Product" />
     <ul style="list-style: none">
         <li>Choose product operation:
-            <input title="Product action" type="text" name="productaction" style="position: relative;top: -5px">
+            <input title="Product action" type="text" name="action" style="position: relative;top: -5px">
             (e.g. update, delete, add)
         </li>
         <li>Product name:

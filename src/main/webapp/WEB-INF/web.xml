@@ -8,42 +8,6 @@
     <servlet>
         <servlet-name>MainServlet</servlet-name>
         <servlet-class>com.odmytrenko.servlet.MainServlet</servlet-class>
-        <init-param>
-            <param-name>categories</param-name>
-            <param-value>/WEB-INF/views/categories.jsp</param-value>
-        </init-param>
-        <init-param>
-            <param-name>index</param-name>
-            <param-value>/WEB-INF/views/index.jsp</param-value>
-        </init-param>
-        <init-param>
-            <param-name>login</param-name>
-            <param-value>/WEB-INF/views/login.jsp</param-value>
-        </init-param>
-        <init-param>
-            <param-name>welcome</param-name>
-            <param-value>/WEB-INF/views/welcome.jsp</param-value>
-        </init-param>
-        <init-param>
-            <param-name>products</param-name>
-            <param-value>/WEB-INF/views/products.jsp</param-value>
-        </init-param>
-        <init-param>
-            <param-name>categorySearch</param-name>
-            <param-value>/WEB-INF/views/categorysearch.jsp</param-value>
-        </init-param>
-        <init-param>
-            <param-name>productSearch</param-name>
-            <param-value>/WEB-INF/views/productsearch.jsp</param-value>
-        </init-param>
-        <init-param>
-            <param-name>adminConsole</param-name>
-            <param-value>/WEB-INF/views/adminconsole.jsp</param-value>
-        </init-param>
-        <init-param>
-            <param-name>adminAction</param-name>
-            <param-value>/WEB-INF/views/performedadminaction.jsp</param-value>
-        </init-param>
     </servlet>
 
     <servlet-mapping>

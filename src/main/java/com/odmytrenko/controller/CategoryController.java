@@ -1,14 +1,10 @@
 package com.odmytrenko.controller;
 
-import com.odmytrenko.model.Category;
 import com.odmytrenko.service.CategoryService;
+import com.odmytrenko.servlet.Request;
+import com.odmytrenko.servlet.ViewModel;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-public class CategoryController {
+public class CategoryController implements Controller {
 
     private CategoryService categoryService;
 
@@ -16,25 +12,14 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    public void findById(HttpServletRequest request, HttpServletResponse response, Long id) throws ServletException, IOException {
-        request.setAttribute("category", categoryService.findById(id));
-    }
-
-    public void create(HttpServletRequest request, HttpServletResponse response) {
-        String categoryName = request.getParameter("categoryName");
-        Category requestedCategory = new Category(null, categoryName, null);
-        request.setAttribute("object", categoryService.create(requestedCategory));
-    }
-
-    public void delete(HttpServletRequest request, HttpServletResponse response) {
-        String categoryName = request.getParameter("categoryName");
-        Category requestedCategory = new Category(null, categoryName, null);
-        request.setAttribute("object", categoryService.delete(requestedCategory));
-    }
-
-    public void update(HttpServletRequest request, HttpServletResponse response) {
-        String categoryName = request.getParameter("categoryName");
-        Category requestedCategory = new Category(null, categoryName, null);
-        request.setAttribute("object", categoryService.update(requestedCategory));
+    @Override
+    public ViewModel process(Request request) {
+        try {
+            return new ViewModel("category").addAttribute("category", categoryService.findById(Long.parseLong(request.getParameter("id"))));
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Invalid id, please specify correct number of id");
+        } catch (IndexOutOfBoundsException e) {
+            throw new RuntimeException("There is no such id, please specify correct number of id");
+        }
     }
 }

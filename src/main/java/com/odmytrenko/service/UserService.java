@@ -2,7 +2,7 @@ package com.odmytrenko.service;
 
 import com.odmytrenko.model.User;
 
-public interface UserService {
+public interface UserService extends CrudService<User> {
 
     User getUser(User user);
 

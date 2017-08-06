@@ -1,13 +1,10 @@
 package com.odmytrenko.controller;
 
 import com.odmytrenko.service.ProductService;
+import com.odmytrenko.servlet.Request;
+import com.odmytrenko.servlet.ViewModel;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-public class GetAllProductsController {
+public class GetAllProductsController implements Controller {
 
     private ProductService productService;
 
@@ -15,7 +12,8 @@ public class GetAllProductsController {
         this.productService = categoryService;
     }
 
-    public void getAllProducts(HttpServletRequest request, HttpServletResponse response, String categoryName) throws ServletException, IOException {
-        request.setAttribute("products", productService.getAllProductsByCategory(categoryName));
+    @Override
+    public ViewModel process(Request request) {
+        return new ViewModel("products").addAttribute("products", productService.getAllProductsByCategory(request.getParameter("category")));
     }
 }
