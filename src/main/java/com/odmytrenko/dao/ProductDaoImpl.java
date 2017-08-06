@@ -1,8 +1,13 @@
 package com.odmytrenko.dao;
 
+import com.odmytrenko.model.Model;
 import com.odmytrenko.model.Product;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Comparator;
 
 public class ProductDaoImpl extends AbstractDao<Product> implements ProductDao {
 
@@ -74,7 +79,7 @@ public class ProductDaoImpl extends AbstractDao<Product> implements ProductDao {
 
     @Override
     public Product delete(Product product) {
-        productMap.get(product.getCategoryName()).remove(product);
+        productMap.get(product.getCategoryName()).removeIf(i -> i.getName().equals(product.getName()));
         return product;
     }
 

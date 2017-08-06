@@ -1,11 +1,15 @@
 package com.odmytrenko.servlet;
 
-import com.odmytrenko.controller.*;
+import com.odmytrenko.controller.Controller;
+import com.odmytrenko.controller.ErrorController;
 import com.odmytrenko.factory.Factory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,12 +57,12 @@ public class MainServlet extends HttpServlet {
 
             if (vm.hasCookie()) {
                 Map<String, String> newCookie = vm.getNewCookie();
-                for (String cookieName : newCookie.keySet()) {
-                    Cookie cookie = new Cookie(cookieName, newCookie.get(cookieName));
+                newCookie.keySet().forEach(c -> {
+                    Cookie cookie = new Cookie(c, newCookie.get(c));
                     cookie.setMaxAge(3600 * 24 * 30);
                     cookie.setPath("/");
                     response.addCookie(cookie);
-                }
+                });
             }
 
             forward(request, response, vm);
@@ -76,9 +80,9 @@ public class MainServlet extends HttpServlet {
     }
 
     private void setAttributes(HttpServletRequest req, ViewModel vm) {
-        for (String attribute : vm.getAttributes().keySet()) {
-            req.setAttribute(attribute, vm.getAttribute(attribute));
-        }
+        vm.getAttributes().keySet().forEach(c -> {
+            req.setAttribute(c, vm.getAttribute(c));
+        });
     }
 
     private String getView(ViewModel vm) {

@@ -17,24 +17,18 @@ public class Request {
 
     private final String method;
     private final String uri;
-    private final Map<String, String> parameters = new HashMap<>();
+    private final Map<String, String[]> parameters = new HashMap<>();
 
     public Request(Map<String, String[]> parameters, String method, String uri) {
         this.method = method.toUpperCase();
         this.uri = uri;
         if (parameters != null) {
-            for (String param : parameters.keySet()) {
-                Object value = parameters.get(param);
-
+            parameters.keySet().forEach(c -> {
+                Object value = parameters.get(c);
                 if (value != null) {
-                    if (value.getClass() == String.class) {
-                        this.parameters.put(param, (String) value);
-                    } else if (value.getClass() == String[].class) {
-                        String[] valueArray = (String[]) value;
-                        this.parameters.put(param, valueArray[0]);
-                    }
+                    this.parameters.put(c, (String[]) value);
                 }
-            }
+            });
         }
 
     }
@@ -44,7 +38,7 @@ public class Request {
     }
 
     public String getParameter(String param) {
-        return parameters.get(param);
+        return parameters.get(param)[0];
     }
 
     @Override

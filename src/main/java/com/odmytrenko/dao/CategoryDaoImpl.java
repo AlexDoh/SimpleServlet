@@ -12,8 +12,11 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
 
     static {
         Category category1 = new Category("Shoes");
+        category1.setId(1L);
         Category category2 = new Category("Dresses");
+        category2.setId(2L);
         Category category3 = new Category("Pants");
+        category3.setId(3L);
         categoryList.add(category1);
         categoryList.add(category2);
         categoryList.add(category3);
@@ -29,7 +32,7 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
 
     @Override
     public Category delete(Category category) {
-        categoryList.remove(category);
+        categoryList.removeIf(i -> i.getName().equals(category.getName()));
         return category;
     }
 

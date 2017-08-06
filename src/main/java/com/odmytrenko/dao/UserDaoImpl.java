@@ -3,7 +3,6 @@ package com.odmytrenko.dao;
 import com.odmytrenko.model.User;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
@@ -13,6 +12,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     static {
         User user1 = new User("Vova", "123123");
         user1.setToken("token1");
+        user1.setAdmin(true);
         User user2 = new User("Vova2", "123123");
         user2.setToken("token2");
         User user3 = new User("Anton", "123123");
@@ -23,20 +23,16 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     public User getUser(User user) {
-        for(User userDB : userList) {
-            if(userDB.equals(user)) {
-                return userDB;
-            }
+        if (userList.stream().anyMatch(p -> p.equals(user))) {
+            return userList.stream().filter(p -> p.equals(user)).findFirst().get();
         }
         return null;
     }
 
     @Override
     public User findByToken(String token) {
-        for(User user : userList) {
-            if(user.getToken().equals(token)) {
-                return user;
-            }
+        if (userList.stream().anyMatch(p -> p.getToken().equals(token))) {
+            return userList.stream().filter(p -> p.getToken().equals(token)).findFirst().get();
         }
         return null;
     }

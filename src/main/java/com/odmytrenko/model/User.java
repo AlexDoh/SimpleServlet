@@ -5,6 +5,7 @@ public class User extends Model {
     private String password;
     private String token;
     private String email;
+    private boolean isAdmin;
 
     public User(String userName, String password) {
         this.name = userName;
@@ -35,6 +36,14 @@ public class User extends Model {
         this.email = email;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -42,11 +51,11 @@ public class User extends Model {
 
         User user = (User) o;
 
+        if (getPassword() != null ? !getPassword().equals(user.getPassword()) : user.getPassword() != null)
+            return false;
         if (getId() != null ? !getId().equals(user.getId()) : user.getId() != null)
             return false;
         if (getName() != null ? !getName().equals(user.getName()) : user.getName() != null)
-            return false;
-        if (getPassword() != null ? !getPassword().equals(user.getPassword()) : user.getPassword() != null)
             return false;
         return getEmail() != null ? getEmail().equals(user.getEmail()) : user.getEmail() == null;
     }
