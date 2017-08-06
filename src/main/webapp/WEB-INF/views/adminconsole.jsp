@@ -18,6 +18,8 @@
             <input title="User name" type="text" name="userName"></li>
         <li>User password:
             <input title="User password" type="password" name="userPassword"></li>
+        <li>User email:
+            <input title="User email" type="email" name="userEmail"></li>
         <li>Administrator privileges:
             <input title="Administrator" type="checkbox" name="admin"></li>
     </ul>

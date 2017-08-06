@@ -2,6 +2,7 @@ package com.odmytrenko.dao;
 
 import com.odmytrenko.model.Category;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -20,6 +21,10 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
         categoryList.add(category1);
         categoryList.add(category2);
         categoryList.add(category3);
+    }
+
+    public CategoryDaoImpl(Connection connection) {
+        super(connection);
     }
 
 

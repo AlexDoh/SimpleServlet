@@ -67,9 +67,8 @@ public class MainServlet extends HttpServlet {
 
             forward(request, response, vm);
         } catch (Throwable t) {
-            ViewModel vm = new ErrorController().process(req);
-            vm.addAttribute("error", t.getClass() + " " + t.getMessage() + ' ' + t.getMessage());
-            forward(request, response, vm);
+            forward(request, response, new ViewModel("error").addAttribute("error",
+                    t.getClass() + " " + t.getMessage() + " " + t.getCause()));
         }
     }
 

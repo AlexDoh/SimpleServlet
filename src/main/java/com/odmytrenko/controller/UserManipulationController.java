@@ -19,6 +19,7 @@ public class UserManipulationController implements Controller {
         String password = request.getParameter("userPassword");
         String isAdmin = request.getParameter("admin");
         User user = new User(userName, password);
+        user.setEmail(request.getParameter("userEmail"));
         user.setToken(userName + System.nanoTime());
         if (isAdmin.equals("on")) {
             user.setAdmin(true);

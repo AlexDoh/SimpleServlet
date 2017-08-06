@@ -1,8 +1,35 @@
 package com.odmytrenko.factory;
 
-import com.odmytrenko.controller.*;
-import com.odmytrenko.dao.*;
-import com.odmytrenko.service.*;
+import com.odmytrenko.controller.ProductManipulationController;
+import com.odmytrenko.controller.CategoryManipulationController;
+import com.odmytrenko.controller.ManipulationController;
+import com.odmytrenko.controller.AdminController;
+import com.odmytrenko.controller.ProfileController;
+import com.odmytrenko.controller.LoginController;
+import com.odmytrenko.controller.IndexController;
+import com.odmytrenko.controller.Controller;
+import com.odmytrenko.controller.ProductController;
+import com.odmytrenko.controller.CategoryController;
+import com.odmytrenko.controller.GetAllCategoriesController;
+import com.odmytrenko.controller.GetAllProductsController;
+import com.odmytrenko.controller.UserManipulationController;
+import com.odmytrenko.controller.ErrorController;
+import com.odmytrenko.dao.ProductDao;
+import com.odmytrenko.dao.ProductDaoImpl;
+import com.odmytrenko.dao.CategoryDao;
+import com.odmytrenko.dao.CategoryDaoImpl;
+import com.odmytrenko.dao.UserDao;
+import com.odmytrenko.dao.UserDaoImpl;
+import com.odmytrenko.service.ProductService;
+import com.odmytrenko.service.ProductServiceImpl;
+import com.odmytrenko.service.CategoryService;
+import com.odmytrenko.service.CategoryServiceImpl;
+import com.odmytrenko.service.UserService;
+import com.odmytrenko.service.UserServiceImpl;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Factory {
 
@@ -15,7 +42,7 @@ public class Factory {
     }
 
     public static UserDao getUserDao() {
-        return new UserDaoImpl();
+        return new UserDaoImpl(getConnection());
     }
 
     public static GetAllCategoriesController getAllCategoriesController() {
@@ -27,7 +54,7 @@ public class Factory {
     }
 
     private static CategoryDao getCategoryDao() {
-        return new CategoryDaoImpl();
+        return new CategoryDaoImpl(getConnection());
     }
 
     public static GetAllProductsController getAllProductsController() {
@@ -39,7 +66,7 @@ public class Factory {
     }
 
     private static ProductDao getProductDao() {
-        return new ProductDaoImpl();
+        return new ProductDaoImpl(getConnection());
     }
 
     public static CategoryController getCategoryController() {
@@ -80,5 +107,17 @@ public class Factory {
 
     public static Controller getProductManipulationController() {
         return new ProductManipulationController(Factory.getProductService());
+    }
+
+    public static Connection getConnection() {
+        Connection connection = null;
+        try {
+            Class.forName("org.h2.Driver");
+            connection = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", "");
+
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException("Driver was not initialized");
+        }
+        return connection;
     }
 }

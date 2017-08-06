@@ -1,8 +1,8 @@
 package com.odmytrenko.dao;
 
-import com.odmytrenko.model.Model;
 import com.odmytrenko.model.Product;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +48,10 @@ public class ProductDaoImpl extends AbstractDao<Product> implements ProductDao {
         productMap.put("Shoes", productListForShoes);
         productMap.put("Dresses", productListForDresses);
         productMap.put("Pants", productListForPants);
+    }
+
+    public ProductDaoImpl(Connection connection) {
+        super(connection);
     }
 
     @Override

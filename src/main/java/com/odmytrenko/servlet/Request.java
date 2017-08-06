@@ -41,6 +41,10 @@ public class Request {
         return parameters.get(param)[0];
     }
 
+    public void setParameter(String param, String[] objects) {
+        parameters.put(param, objects);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
