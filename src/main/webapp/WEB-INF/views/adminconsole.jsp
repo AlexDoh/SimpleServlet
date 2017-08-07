@@ -21,7 +21,8 @@
         <li>User email:
             <input title="User email" type="email" name="userEmail"></li>
         <li>Administrator privileges:
-            <input title="Administrator" type="checkbox" name="admin"></li>
+            <input title="Administrator" type="checkbox" name="admin">
+            <input title="Administrator" type="hidden" name="admin" value="off"></li>
     </ul>
     <br>
     <input type="submit" value="Submit" style="position: relative;bottom: 20px">

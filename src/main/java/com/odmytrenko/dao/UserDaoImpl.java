@@ -1,32 +1,38 @@
 package com.odmytrenko.dao;
 
+import com.odmytrenko.factory.Factory;
 import com.odmytrenko.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
-    private static final Set<User> userList = new HashSet<>();
-
     static {
-        User user1 = new User("Vova", "123123");
-        user1.setEmail("player1@gmail.com");
-        user1.setToken("token1");
-        user1.setAdmin(true);
-        User user2 = new User("Vova2", "123123");
-        user1.setEmail("player2@gmail.com");
-        user2.setToken("token2");
-        User user3 = new User("Anton", "123123");
-        user1.setEmail("player3@gmail.com");
-        user3.setToken("token3");
-        userList.add(user1);
-        userList.add(user2);
-        userList.add(user3);
+        try {
+            String createTable = "CREATE TABLE IF NOT EXISTS USERS (\n" +
+                    "  ID INT PRIMARY KEY AUTO_INCREMENT,\n" +
+                    "  USERNAME VARCHAR(30),\n" +
+                    "  TOKEN VARCHAR(255),\n" +
+                    "  PASSWORD VARCHAR(255),\n" +
+                    "  EMAIL VARCHAR(30),\n" +
+                    "  ADMIN BOOLEAN\n" +
+                    ");";
+            Factory.getConnection().prepareStatement(createTable).execute();
+            String user1 = "MERGE INTO USERS (USERNAME, PASSWORD, EMAIL, TOKEN, ADMIN, ID) VALUES(" +
+                    "'Vova', '123123', 'player1@gmail.com', 'token1', TRUE, 1);";
+            String user2 = "MERGE INTO USERS (USERNAME, PASSWORD, EMAIL, TOKEN, ADMIN, ID) VALUES(" +
+                    "'Vova2', '123123', 'player2@gmail.com', 'token2', FALSE, 2);";
+            String user3 = "MERGE INTO USERS (USERNAME, PASSWORD, EMAIL, TOKEN, ADMIN, ID) VALUES(" +
+                    "'Anton', '123123', 'player3@gmail.com', 'token3', FALSE, 3);";
+            Factory.getConnection().prepareStatement(user1).execute();
+            Factory.getConnection().prepareStatement(user2).execute();
+            Factory.getConnection().prepareStatement(user3).execute();
+        } catch (SQLException e) {
+            throw new RuntimeException("There was an error during query");
+        }
     }
 
     public UserDaoImpl(Connection connection) {
@@ -59,10 +65,10 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public User findByToken(String token) {
-        String getUserQuery = "SELECT USERNAME, PASSWORD, EMAIL, TOKEN, ADMIN FROM USERS WHERE TOKEN = ?;";
+        String findUserByToken = "SELECT USERNAME, PASSWORD, EMAIL, TOKEN, ADMIN FROM USERS WHERE TOKEN = ?;";
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(getUserQuery);
+            PreparedStatement preparedStatement = connection.prepareStatement(findUserByToken);
 
             preparedStatement.setString(1, token);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -93,51 +99,54 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setString(5, String.valueOf(user.isAdmin()));
             preparedStatement.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
+            preparedStatement.close();
+            return user;
+        } catch (SQLException e) {
+            throw new RuntimeException("There was an error during query");
         }
-        return user;
     }
 
     @Override
     public User delete(User user) {
-        userList.remove(user);
-        return user;
+        String deleteUser = "DELETE FROM USERS WHERE USERNAME = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(deleteUser);
+
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.execute();
+            preparedStatement.close();
+            return user;
+        } catch (SQLException e) {
+            throw new RuntimeException("There is no such user");
+        }
     }
 
     @Override
     public User update(User user) {
-        userList.removeIf(i -> i.getName().equals(user.getName()));
-        userList.add(user);
-        return user;
+        String findUserByToken = "UPDATE USERS SET " +
+                "PASSWORD = ?," +
+                "EMAIL = ?," +
+                "ADMIN = ?" +
+                "WHERE USERNAME = ?;";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(findUserByToken);
+
+            preparedStatement.setString(1, user.getPassword());
+            preparedStatement.setString(2, user.getEmail());
+            preparedStatement.setString(3, String.valueOf(user.isAdmin()));
+            preparedStatement.setString(4, user.getName());
+            preparedStatement.execute();
+            preparedStatement.close();
+            return user;
+        } catch (SQLException e) {
+            throw new RuntimeException("There is no such user");
+        }
     }
 
     @Override
     public User findById(Long id) {
         return null;
     }
-
-//    @Override
-//    public User create(User user) {
-//        userList.add(user);
-//        return user;
-//    }
-//
-//    @Override
-//    public User delete(User user) {
-//        userList.remove(user);
-//        return user;
-//    }
-//
-//    @Override
-//    public User update(User user) {
-//        userList.removeIf(i -> i.getName().equals(user.getName()));
-//        userList.add(user);
-//        return user;
-//    }
-//
-//    @Override
-//    public User findById(Long id) {
-//        return null;
-//    }
 }
