@@ -1,20 +1,6 @@
 package com.odmytrenko.factory;
 
-import com.odmytrenko.controller.UserImageUploadController;
-import com.odmytrenko.controller.RegistrationController;
-import com.odmytrenko.controller.ProductManipulationController;
-import com.odmytrenko.controller.CategoryManipulationController;
-import com.odmytrenko.controller.ManipulationController;
-import com.odmytrenko.controller.AdminController;
-import com.odmytrenko.controller.ProfileController;
-import com.odmytrenko.controller.LoginController;
-import com.odmytrenko.controller.IndexController;
-import com.odmytrenko.controller.Controller;
-import com.odmytrenko.controller.ProductController;
-import com.odmytrenko.controller.CategoryController;
-import com.odmytrenko.controller.GetAllCategoriesController;
-import com.odmytrenko.controller.GetAllProductsController;
-import com.odmytrenko.controller.UserManipulationController;
+import com.odmytrenko.controller.*;
 import com.odmytrenko.dao.ProductDao;
 import com.odmytrenko.dao.ProductDaoImpl;
 import com.odmytrenko.dao.CategoryDao;
@@ -33,6 +19,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Factory {
+
+    public static Controller getUserManagement() {
+        return new UserManagementController(Factory.getUserService());
+    }
 
     public static Controller getImageUploadController() {
         return new UserImageUploadController();

@@ -6,14 +6,18 @@
 </head>
 <body>
 <h1>Hello, Admin!</h1>
-<h3>User manipulation:</h3>
+<a href="${pageContext.request.contextPath}/filter/adminconsole/usermanagement"
+   style="position: relative;bottom: -5px;"><h3>User management</h3></a><br>
 <h3>Category manipulation:</h3>
-<form method="POST" action="<c:url value="/filter/performedadminaction"/>">
-    <input type="hidden" name="type" value="Category" />
+<form method="POST" action="<c:url value="/filter/performedaction"/>" id="category">
+    <input type="hidden" name="type" value="Category"/>
     <ul style="list-style: none">
-        <li>Choose category operation:
-            <input title="Category action" type="text" name="action" style="position: relative;top: -5px">
-            (e.g. update, delete, add)
+        <li>Category action:
+            <select title="Category action" name="action" form="category" style="position: relative;top: -5px">
+                <option value="add">Create</option>
+                <option value="update">Update</option>
+                <option value="delete">Delete</option>
+            </select>
         </li>
         <li>Category name:
             <input title="Category name" type="text" name="categoryName"></li>
@@ -23,7 +27,7 @@
 </form>
 <h3>Product manipulation:</h3>
 <form method="POST" action="<c:url value="/filter/performedadminaction"/>">
-    <input type="hidden" name="type" value="Product" />
+    <input type="hidden" name="type" value="Product"/>
     <ul style="list-style: none">
         <li>Choose product operation:
             <input title="Product action" type="text" name="action" style="position: relative;top: -5px">

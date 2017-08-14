@@ -7,6 +7,7 @@
 <body>
 <h1>Please fill the registration form (optionally upload image at first) :</h1>
 <form method="POST" action="<c:url value="/filter/performedaction"/>">
+    <input type="hidden" name="action" value="add"/>
     <input type="hidden" name="type" value="User"/>
     <ul style="list-style: none">
         <li>User name:

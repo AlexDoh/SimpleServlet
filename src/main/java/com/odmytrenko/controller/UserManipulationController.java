@@ -33,7 +33,6 @@ public class UserManipulationController implements Controller {
         Set<Roles> roles = new HashSet<>();
         roles.add(Roles.USER);
         user.setRoles(roles);
-        return new ViewModel("performedaction").addAttribute("object", userService.create(user));
-//        return CrudController.process(request, userService, user);
+        return CrudController.process(request, userService, user);
     }
 }

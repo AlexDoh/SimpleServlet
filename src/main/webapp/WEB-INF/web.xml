@@ -34,13 +34,33 @@
     </servlet-mapping>
 
     <filter>
-        <filter-name>UserFilter</filter-name>
-        <filter-class>com.odmytrenko.filter.UserFilter</filter-class>
+        <filter-name>ProfileFilter</filter-name>
+        <filter-class>com.odmytrenko.filter.ProfileFilter</filter-class>
     </filter>
 
     <filter-mapping>
-        <filter-name>UserFilter</filter-name>
-        <url-pattern>/filter/*</url-pattern>
+        <filter-name>ProfileFilter</filter-name>
+        <url-pattern>/filter/profile/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.odmytrenko.filter.LoginFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/filter/login/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>com.odmytrenko.filter.AdminFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/filter/adminconsole/*</url-pattern>
     </filter-mapping>
 
 </web-app>

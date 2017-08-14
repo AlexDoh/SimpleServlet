@@ -3,6 +3,8 @@ package com.odmytrenko.service;
 import com.odmytrenko.dao.UserDao;
 import com.odmytrenko.model.User;
 
+import java.util.Set;
+
 public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
@@ -20,6 +22,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByToken(String token) {
         return userDao.findByToken(token);
+    }
+
+    @Override
+    public Set<User> getAll() {
+        return userDao.getAll();
     }
 
     private void checkUser(User user) {

@@ -2,6 +2,8 @@ package com.odmytrenko.service;
 
 import com.odmytrenko.model.User;
 
+import java.util.Set;
+
 public interface UserService extends CrudService<User> {
 
     User getUser(User user);
@@ -13,5 +15,7 @@ public interface UserService extends CrudService<User> {
     User update(User user);
 
     User findByToken(String token);
+
+    Set<User> getAll();
 
 }

@@ -10,15 +10,15 @@ public class CrudController {
     public static ViewModel process(Request request, CrudService service, Model model) {
         switch (request.getParameter("action")) {
             case "add":
-                return new ViewModel("performedadminaction").
+                return new ViewModel("performedaction").
                         addAttribute("object", service.create(model));
             case "update":
-                return new ViewModel("performedadminaction").
+                return new ViewModel("performedaction").
                         addAttribute("object", service.update(model));
             case "delete":
-                return new ViewModel("performedadminaction").
+                return new ViewModel("performedaction").
                         addAttribute("object", service.delete(model));
         }
-        throw new RuntimeException("You have entered wrong command, please try again (add, update, delete)");
+        throw new RuntimeException("There was problem with the operation");
     }
 }

@@ -39,6 +39,7 @@ public class MainServlet extends HttpServlet {
         controllerMap.put(Request.create("GET", "/filter/adminconsole"), Factory.getAdminController());
         controllerMap.put(Request.create("POST", "/filter/performedaction"), Factory.getManipulationController());
         controllerMap.put(Request.create("POST", "/filter/profile/imageupload"), Factory.getImageUploadController());
+        controllerMap.put(Request.create("GET", "/filter/adminconsole/usermanagement"), Factory.getUserManagement());
     }
 
     @Override
