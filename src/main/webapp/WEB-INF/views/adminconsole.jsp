@@ -7,26 +7,6 @@
 <body>
 <h1>Hello, Admin!</h1>
 <h3>User manipulation:</h3>
-<form method="POST" action="<c:url value="/filter/performedadminaction"/>">
-    <input type="hidden" name="type" value="User" />
-    <ul style="list-style: none">
-        <li>Choose user operation:
-            <input title="User action" type="text" name="action" style="position: relative;top: -5px">
-            (e.g. update, delete, add)
-        </li>
-        <li>User name:
-            <input title="User name" type="text" name="userName"></li>
-        <li>User password:
-            <input title="User password" type="password" name="userPassword"></li>
-        <li>User email:
-            <input title="User email" type="email" name="userEmail"></li>
-        <li>Administrator privileges:
-            <input title="Administrator" type="checkbox" name="admin">
-            <input title="Administrator" type="hidden" name="admin" value="off"></li>
-    </ul>
-    <br>
-    <input type="submit" value="Submit" style="position: relative;bottom: 20px">
-</form>
 <h3>Category manipulation:</h3>
 <form method="POST" action="<c:url value="/filter/performedadminaction"/>">
     <input type="hidden" name="type" value="Category" />

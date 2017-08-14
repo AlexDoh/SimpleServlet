@@ -3,6 +3,8 @@ package com.odmytrenko.servlet;
 import com.odmytrenko.controller.Controller;
 import com.odmytrenko.controller.ErrorController;
 import com.odmytrenko.factory.Factory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +12,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,11 +20,14 @@ import java.util.Map;
 public class MainServlet extends HttpServlet {
 
     private Map<Request, Controller> controllerMap = new HashMap<>();
+    private static final int MAX_MEMORY_SIZE = 1024 * 1024 * 2;
+    private static final int MAX_REQUEST_SIZE = 1024 * 1024;
 
     @Override
     public void init() throws ServletException {
         controllerMap.put(Request.create("GET", "/filter/"), Factory.getIndexController());
         controllerMap.put(Request.create("GET", "/filter/login"), Factory.getLoginController());
+        controllerMap.put(Request.create("GET", "/filter/registration"), Factory.getRegistrationController());
         controllerMap.put(Request.create("GET", "/filter/profile"), Factory.getLoginController());
         controllerMap.put(Request.create("POST", "/filter/profile"), Factory.getProfileController());
         controllerMap.put(Request.create("GET", "/filter/categories"), Factory.getAllCategoriesController());
@@ -31,7 +37,8 @@ public class MainServlet extends HttpServlet {
         controllerMap.put(Request.create("GET", "/filter/product"), Factory.getProductController());
         controllerMap.put(Request.create("POST", "/filter/product"), Factory.getProductController());
         controllerMap.put(Request.create("GET", "/filter/adminconsole"), Factory.getAdminController());
-        controllerMap.put(Request.create("POST", "/filter/performedadminaction"), Factory.getManipulationController());
+        controllerMap.put(Request.create("POST", "/filter/performedaction"), Factory.getManipulationController());
+        controllerMap.put(Request.create("POST", "/filter/profile/imageupload"), Factory.getImageUploadController());
     }
 
     @Override
@@ -46,11 +53,21 @@ public class MainServlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Request req = new Request(request.getParameterMap(), request.getMethod(), request.getRequestURI());
+        req.setParameter("file-upload", new String[]{getServletContext().getInitParameter("file-upload")});
 
         try {
             Controller controller = controllerMap.get(req);
             if (controller == null) {
                 throw new RuntimeException("Cannot handle" + req.getUri());
+            }
+
+            if (ServletFileUpload.isMultipartContent(request)) {
+                DiskFileItemFactory factory = new DiskFileItemFactory();
+                factory.setSizeThreshold(MAX_MEMORY_SIZE);
+                factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
+                ServletFileUpload upload = new ServletFileUpload(factory);
+                upload.setSizeMax(MAX_REQUEST_SIZE);
+                req.setItemsForUpload(upload.parseRequest(request));
             }
 
             ViewModel vm = controller.process(req);

@@ -1,8 +1,11 @@
 package com.odmytrenko.servlet;
 
 import com.google.common.base.MoreObjects;
+import org.apache.commons.fileupload.FileItem;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Request {
@@ -18,6 +21,7 @@ public class Request {
     private final String method;
     private final String uri;
     private final Map<String, String[]> parameters = new HashMap<>();
+    private List<FileItem> itemsForUpload = new ArrayList<>();
 
     public Request(Map<String, String[]> parameters, String method, String uri) {
         this.method = method.toUpperCase();
@@ -43,6 +47,14 @@ public class Request {
 
     public void setParameter(String param, String[] objects) {
         parameters.put(param, objects);
+    }
+
+    public List<FileItem> getItemsForUpload() {
+        return itemsForUpload;
+    }
+
+    public void setItemsForUpload(List<FileItem> itemsForUpload) {
+        this.itemsForUpload = itemsForUpload;
     }
 
     @Override

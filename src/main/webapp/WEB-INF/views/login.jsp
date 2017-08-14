@@ -11,7 +11,11 @@
     Password:
     <input title="Password" type="password" name="userPassword"><br>
     <button type="submit">LogIn</button>
-</form>
+</form><br>
+<h2>If you are not registered user, please click the registration button :</h2>
+<form action="<c:url value="/filter/registration"/>">
+<button type="submit" style="height:50px;width:200px">Registration</button>
+</form><br>
 <a href="${pageContext.request.contextPath}/filter/" style="position: relative;bottom: -40px;">Back to main page</a>
 </body>
 </html>

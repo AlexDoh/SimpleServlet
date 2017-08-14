@@ -17,6 +17,11 @@ public class UserServiceImpl implements UserService {
         return userDao.getUser(user);
     }
 
+    @Override
+    public User findByToken(String token) {
+        return userDao.findByToken(token);
+    }
+
     private void checkUser(User user) {
         if (userDao.getUser(user) == null) {
             throw new RuntimeException("User " + user + " does not exist");

@@ -1,5 +1,7 @@
 package com.odmytrenko.factory;
 
+import com.odmytrenko.controller.UserImageUploadController;
+import com.odmytrenko.controller.RegistrationController;
 import com.odmytrenko.controller.ProductManipulationController;
 import com.odmytrenko.controller.CategoryManipulationController;
 import com.odmytrenko.controller.ManipulationController;
@@ -13,7 +15,6 @@ import com.odmytrenko.controller.CategoryController;
 import com.odmytrenko.controller.GetAllCategoriesController;
 import com.odmytrenko.controller.GetAllProductsController;
 import com.odmytrenko.controller.UserManipulationController;
-import com.odmytrenko.controller.ErrorController;
 import com.odmytrenko.dao.ProductDao;
 import com.odmytrenko.dao.ProductDaoImpl;
 import com.odmytrenko.dao.CategoryDao;
@@ -33,8 +34,12 @@ import java.sql.SQLException;
 
 public class Factory {
 
-    public static UserManipulationController getUserController() {
-        return new UserManipulationController(Factory.getUserService());
+    public static Controller getImageUploadController() {
+        return new UserImageUploadController();
+    }
+
+    public static Controller getRegistrationController() {
+        return new RegistrationController();
     }
 
     public static UserService getUserService() {
@@ -45,7 +50,7 @@ public class Factory {
         return new UserDaoImpl(getConnection());
     }
 
-    public static GetAllCategoriesController getAllCategoriesController() {
+    public static Controller getAllCategoriesController() {
         return new GetAllCategoriesController(Factory.getCategoryService());
     }
 
@@ -57,7 +62,7 @@ public class Factory {
         return new CategoryDaoImpl(getConnection());
     }
 
-    public static GetAllProductsController getAllProductsController() {
+    public static Controller getAllProductsController() {
         return new GetAllProductsController(Factory.getProductService());
     }
 
@@ -69,11 +74,11 @@ public class Factory {
         return new ProductDaoImpl(getConnection());
     }
 
-    public static CategoryController getCategoryController() {
+    public static Controller getCategoryController() {
         return new CategoryController(Factory.getCategoryService());
     }
 
-    public static ProductController getProductController() {
+    public static Controller getProductController() {
         return new ProductController(Factory.getProductService());
     }
 
@@ -110,7 +115,7 @@ public class Factory {
     }
 
     public static Connection getConnection() {
-        Connection connection = null;
+        Connection connection;
         try {
             Class.forName("org.h2.Driver");
             connection = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", "");

@@ -12,4 +12,6 @@ public interface UserService extends CrudService<User> {
 
     User update(User user);
 
+    User findByToken(String token);
+
 }

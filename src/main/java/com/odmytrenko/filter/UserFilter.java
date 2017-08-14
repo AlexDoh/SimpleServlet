@@ -63,19 +63,19 @@ public class UserFilter implements Filter {
                 }
             }
         }
-        if (protectedUrls.get("admin").equals(uri) && cookies != null) {
-            if (Arrays.stream(cookies).anyMatch(p -> p.getName().equals("token"))) {
-                User user = userDao.findByToken(Arrays.stream(cookies).filter(p -> p.getName().equals("token")).
-                        findFirst().get().getValue());
-                if (user.isAdmin()) {
-                    request.getRequestDispatcher("/WEB-INF/views/adminconsole.jsp").forward(request, response);
-                } else {
-                    throw new RuntimeException("User doesn't have privileges to enter this page");
-                }
-            } else {
-                throw new RuntimeException("You must be logged on to enter this page");
-            }
-        }
+//        if (protectedUrls.get("admin").equals(uri) && cookies != null) {
+//            if (Arrays.stream(cookies).anyMatch(p -> p.getName().equals("token"))) {
+//                User user = userDao.findByToken(Arrays.stream(cookies).filter(p -> p.getName().equals("token")).
+//                        findFirst().get().getValue());
+//                if (user.isAdmin()) {
+//                    request.getRequestDispatcher("/WEB-INF/views/adminconsole.jsp").forward(request, response);
+//                } else {
+//                    throw new RuntimeException("User doesn't have privileges to enter this page");
+//                }
+//            } else {
+//                throw new RuntimeException("You must be logged on to enter this page");
+//            }
+//        }
         chain.doFilter(request, response);
     }
 

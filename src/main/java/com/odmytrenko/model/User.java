@@ -1,11 +1,14 @@
 package com.odmytrenko.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class User extends Model {
 
     private String password;
     private String token;
     private String email;
-    private boolean isAdmin;
+    private Set<Roles> roles = new HashSet<>();
 
     public User(String userName, String password) {
         this.name = userName;
@@ -36,12 +39,12 @@ public class User extends Model {
         this.email = email;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
+    public Set<Roles> getRoles() {
+        return roles;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
+    public void setRoles(Set<Roles> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -53,19 +56,13 @@ public class User extends Model {
 
         if (getPassword() != null ? !getPassword().equals(user.getPassword()) : user.getPassword() != null)
             return false;
-        if (getId() != null ? !getId().equals(user.getId()) : user.getId() != null)
-            return false;
-        if (getName() != null ? !getName().equals(user.getName()) : user.getName() != null)
-            return false;
-        return getEmail() != null ? getEmail().equals(user.getEmail()) : user.getEmail() == null;
+        return getName() != null ? getName().equals(user.getEmail()) : user.getName() == null;
     }
 
     @Override
     public int hashCode() {
         int result = getPassword() != null ? getPassword().hashCode() : 0;
-        result = 31 * result + (getId() != null ? getId().hashCode() : 0);
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
         return result;
     }
 }
