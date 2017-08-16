@@ -2,17 +2,19 @@ package com.odmytrenko.service;
 
 import com.odmytrenko.model.Product;
 
-import java.util.List;
+import java.util.Set;
 
 public interface ProductService extends CrudService<Product> {
 
-    List<Product> getAllProductsByCategory(String categoryName);
+    Set<Product> getAll();
 
-    Product findByIdAndCategoryName(Long id, String categoryName);
+    Set<Product> getAllByCategoryId(Long categoryId);
 
     Product create(Product product);
 
     Product delete(Product product);
 
     Product update(Product product);
+
+    Product findById(Long id);
 }

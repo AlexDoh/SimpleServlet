@@ -61,7 +61,7 @@ public class Factory {
     }
 
     public static Controller getAllProductsController() {
-        return new GetAllProductsController(Factory.getProductService());
+        return new GetAllProductsController(Factory.getProductService(), Factory.getCategoryService());
     }
 
     private static ProductService getProductService() {
@@ -69,7 +69,7 @@ public class Factory {
     }
 
     private static ProductDao getProductDao() {
-        return new ProductDaoImpl(getConnection());
+        return new ProductDaoImpl(getConnection(), Factory.getCategoryDao());
     }
 
     public static Controller getCategoryController() {
@@ -93,7 +93,7 @@ public class Factory {
     }
 
     public static Controller getAdminController() {
-        return new AdminController(Factory.getCategoryService());
+        return new AdminController(Factory.getCategoryService(), Factory.getProductService());
     }
 
     public static Controller getManipulationController() {
@@ -109,7 +109,7 @@ public class Factory {
     }
 
     public static Controller getProductManipulationController() {
-        return new ProductManipulationController(Factory.getProductService());
+        return new ProductManipulationController(Factory.getProductService(), Factory.getCategoryService());
     }
 
     public static Connection getConnection() {

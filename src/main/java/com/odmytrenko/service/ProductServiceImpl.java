@@ -3,7 +3,7 @@ package com.odmytrenko.service;
 import com.odmytrenko.dao.ProductDao;
 import com.odmytrenko.model.Product;
 
-import java.util.List;
+import java.util.Set;
 
 public class ProductServiceImpl implements ProductService {
 
@@ -14,13 +14,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProductsByCategory(String categoryName) {
-        return productDao.getAllProductsByCategory(categoryName);
+    public Set<Product> getAll() {
+        return productDao.getAll();
     }
 
     @Override
-    public Product findByIdAndCategoryName(Long id, String categoryName) {
-        return productDao.findByIdAndCategoryName(id, categoryName);
+    public Set<Product> getAllByCategoryId(Long categoryId) {
+        return productDao.getAllByCategoryId(categoryId);
     }
 
     @Override
@@ -36,6 +36,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product update(Product product) {
         return productDao.update(product);
+    }
+
+    @Override
+    public Product findById(Long id) {
+        return productDao.findById(id);
     }
 
 }

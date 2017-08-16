@@ -115,7 +115,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     @Override
     public User create(User user) {
         if (doesUserExist(user.getName())) {
-            throw new RuntimeException("Such user in already exist");
+            throw new RuntimeException("Such user is already exist");
         }
         String createUserQuery = "INSERT INTO USERS (USERNAME, TOKEN, PASSWORD, EMAIL) VALUES(?, ?, ?, ?);";
         String addRoleQuery = "INSERT INTO USERTOROLE (USERID, ROLEID) VALUES((SELECT ID FROM USERS WHERE USERNAME = ?), 2);";
@@ -130,7 +130,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
             preparedStatementForRole.execute();
             return user;
         } catch (SQLException e) {
-            throw new RuntimeException("There was an error during the query");
+            throw new RuntimeException("There was an error during the query " + e);
         }
     }
 

@@ -11,7 +11,7 @@
     <input type="submit" value="Submit">
 </form>
 <c:forEach var="e" items="${categories}">
-    <a href="${pageContext.request.contextPath}/filter/products?category=<c:out value="${e.name}"/>"
+    <a href="${pageContext.request.contextPath}/filter/products?categoryId=<c:out value="${e.id}"/>"
        style="font-size: 20px"><c:out
             value="${e.name}"/></a>
 </c:forEach><br>

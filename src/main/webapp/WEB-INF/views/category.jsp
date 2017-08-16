@@ -5,7 +5,7 @@
     <title>CategorySearch</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/filter/products?category=<c:out value="${category.name}"/>"
+<a href="${pageContext.request.contextPath}/filter/products?categoryId=<c:out value="${category.id}"/>"
    style="font-size: 20px"><c:out
         value="${category.name}"/></a><br>
 <h3 style="position: relative;bottom: -20px;">This category can be found by link :</h3><br>

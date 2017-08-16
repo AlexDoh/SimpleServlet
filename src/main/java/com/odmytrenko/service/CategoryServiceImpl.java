@@ -3,7 +3,7 @@ package com.odmytrenko.service;
 import com.odmytrenko.dao.CategoryDao;
 import com.odmytrenko.model.Category;
 
-import java.util.List;
+import java.util.Set;
 
 public class CategoryServiceImpl implements CategoryService {
 
@@ -14,7 +14,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> getAll() {
+    public Set<Category> getAll() {
         return categoryDao.getAll();
     }
 

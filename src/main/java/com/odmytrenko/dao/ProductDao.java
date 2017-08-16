@@ -2,12 +2,12 @@ package com.odmytrenko.dao;
 
 import com.odmytrenko.model.Product;
 
-import java.util.List;
+import java.util.Set;
 
 public interface ProductDao extends GenericDao<Product> {
 
-    List<Product> getAllProductsByCategory(String categoryName);
+    Set<Product> getAll();
 
-    Product findByIdAndCategoryName(Long id, String categoryName);
+    Set<Product> getAllByCategoryId(Long categoryId);
 
 }

@@ -2,11 +2,11 @@ package com.odmytrenko.service;
 
 import com.odmytrenko.model.Category;
 
-import java.util.List;
+import java.util.Set;
 
 public interface CategoryService extends CrudService<Category> {
 
-    List<Category> getAll();
+    Set<Category> getAll();
 
     Category findById(Long id);
 
