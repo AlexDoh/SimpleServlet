@@ -26,7 +26,7 @@
     <input type="submit" value="Submit" style="position: relative;bottom: 20px">
 </form>
 <h3>Product manipulation:</h3>
-<form method="POST" action="<c:url value="/filter/performedadminaction"/>" id="product">
+<form method="POST" action="<c:url value="/filter/performedaction"/>" id="product">
     <input type="hidden" name="type" value="Product"/>
     <ul style="list-style: none">
         <li>Choose product operation:
@@ -43,7 +43,7 @@
         <li>Category name for product:
             <select title="Product categoryName" name="productCategoryName" form="product">
                 <c:forEach var="c" items="${categories}">
-                    <option value="${c.id}">
+                    <option value="${c.name}">
                         <c:out value="${c.name}"/>
                     </option>
                 </c:forEach>
