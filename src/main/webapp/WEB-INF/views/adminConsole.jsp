@@ -26,19 +26,29 @@
     <input type="submit" value="Submit" style="position: relative;bottom: 20px">
 </form>
 <h3>Product manipulation:</h3>
-<form method="POST" action="<c:url value="/filter/performedadminaction"/>">
+<form method="POST" action="<c:url value="/filter/performedadminaction"/>" id="product">
     <input type="hidden" name="type" value="Product"/>
     <ul style="list-style: none">
         <li>Choose product operation:
-            <input title="Product action" type="text" name="action" style="position: relative;top: -5px">
-            (e.g. update, delete, add)
+            <select title="Product action" name="action" form="product" style="position: relative;top: -5px">
+                <option value="add">Create</option>
+                <option value="update">Update</option>
+                <option value="delete">Delete</option>
+            </select>
         </li>
         <li>Product name:
             <input title="Product name" type="text" name="productName"></li>
         <li>Product description:
             <input title="Product description" type="text" name="productDescription"></li>
         <li>Category name for product:
-            <input title="Product categoryName" type="text" name="productCategoryName"></li>
+            <select title="Product categoryName" name="productCategoryName" form="product">
+                <c:forEach var="c" items="${categories}">
+                    <option value="${c.id}">
+                        <c:out value="${c.name}"/>
+                    </option>
+                </c:forEach>
+            </select>
+        </li>
     </ul>
     <br>
     <input type="submit" value="Submit" style="position: relative;bottom: 20px">

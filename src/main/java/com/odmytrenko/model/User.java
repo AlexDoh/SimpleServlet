@@ -56,7 +56,7 @@ public class User extends Model {
 
         if (getPassword() != null ? !getPassword().equals(user.getPassword()) : user.getPassword() != null)
             return false;
-        return getName() != null ? getName().equals(user.getEmail()) : user.getName() == null;
+        return getName() != null ? getName().equals(user.getName()) : user.getName() == null;
     }
 
     @Override

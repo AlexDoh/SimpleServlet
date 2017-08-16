@@ -85,7 +85,7 @@ public class Factory {
     }
 
     public static Controller getAdminController() {
-        return new AdminController();
+        return new AdminController(Factory.getCategoryService());
     }
 
     public static Controller getManipulationController() {

@@ -14,6 +14,6 @@ public class UserManagementController implements Controller {
 
     @Override
     public ViewModel process(Request request) {
-        return new ViewModel("usermanagement").addAttribute("users", userService.getAll());
+        return new ViewModel("userManagement").addAttribute("users", userService.getAll());
     }
 }

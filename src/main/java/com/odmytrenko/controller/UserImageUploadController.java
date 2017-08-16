@@ -25,7 +25,7 @@ public class UserImageUploadController implements Controller {
                 }
             }
         });
-        return new ViewModel("performedaction").addAttribute("object", new User(userName[0], null)).
+        return new ViewModel("performedAction").addAttribute("object", new User(userName[0], null)).
                 addAttribute("type", "Image for");
     }
 }

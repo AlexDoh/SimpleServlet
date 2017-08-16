@@ -8,32 +8,31 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     static {
         try {
-            String createUsersTable = "CREATE TABLE IF NOT EXISTS USERS (\n" +
-                    "   ID INT PRIMARY KEY AUTO_INCREMENT,\n" +
-                    "   USERNAME VARCHAR(30),\n" +
-                    "   TOKEN VARCHAR(255),\n" +
-                    "   PASSWORD VARCHAR(255),\n" +
-                    "   EMAIL VARCHAR(30),\n" +
+            String createUsersTable = "CREATE TABLE IF NOT EXISTS USERS (" +
+                    "   ID INT PRIMARY KEY AUTO_INCREMENT," +
+                    "   USERNAME VARCHAR(30)," +
+                    "   TOKEN VARCHAR(255)," +
+                    "   PASSWORD VARCHAR(255)," +
+                    "   EMAIL VARCHAR(30)," +
                     ");";
-            String createRolesTable = "CREATE TABLE IF NOT EXISTS ROLES (\n" +
-                    "   ID INT PRIMARY KEY AUTO_INCREMENT,\n" +
-                    "   NAME VARCHAR(30)\n" +
+            String createRolesTable = "CREATE TABLE IF NOT EXISTS ROLES (" +
+                    "   ID INT PRIMARY KEY AUTO_INCREMENT," +
+                    "   NAME VARCHAR(30)" +
                     ");";
-            String createUserToRoleTable = "CREATE TABLE IF NOT EXISTS USERTOROLE (\n" +
-                    "   ID INT PRIMARY KEY AUTO_INCREMENT,\n" +
-                    "   USERID INT,\n" +
-                    "   ROLEID INT,\n" +
-                    "   FOREIGN KEY (ROLEID) REFERENCES ROLES(ID),\n" +
-                    "   FOREIGN KEY (USERID) REFERENCES USERS(ID)\n" +
+            String createUserToRoleTable = "CREATE TABLE IF NOT EXISTS USERTOROLE (" +
+                    "   ID INT PRIMARY KEY AUTO_INCREMENT," +
+                    "   USERID INT," +
+                    "   ROLEID INT," +
+                    "   FOREIGN KEY (ROLEID) REFERENCES ROLES(ID)," +
+                    "   FOREIGN KEY (USERID) REFERENCES USERS(ID)" +
                     ");";
             Factory.getConnection().prepareStatement(createUsersTable).execute();
             Factory.getConnection().prepareStatement(createRolesTable).execute();
@@ -45,12 +44,12 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
                     "'User2', '123123', 'player2@gmail.com', 'token2', 2);";
             String user3 = "MERGE INTO USERS (USERNAME, PASSWORD, EMAIL, TOKEN, ID) VALUES(" +
                     "'User3', '123123', 'player3@gmail.com', 'token3', 3);";
-            String roles = "MERGE INTO ROLES (NAME, ID) VALUES('ADMIN', 1);\n" +
-                    "MERGE INTO ROLES (NAME, ID) VALUES('USER', 2);\n" +
+            String roles = "MERGE INTO ROLES (NAME, ID) VALUES('ADMIN', 1);" +
+                    "MERGE INTO ROLES (NAME, ID) VALUES('USER', 2);" +
                     "MERGE INTO ROLES (NAME, ID) VALUES('MODERATOR', 3);";
-            String roleAssignments = "MERGE INTO USERTOROLE (USERID, ROLEID, ID) VALUES(1, 1, 1);\n" +
-                    "MERGE INTO USERTOROLE (USERID, ROLEID, ID) VALUES(1, 2, 2);\n" +
-                    "MERGE INTO USERTOROLE (USERID, ROLEID, ID) VALUES(2, 2, 3);\n" +
+            String roleAssignments = "MERGE INTO USERTOROLE (USERID, ROLEID, ID) VALUES(1, 1, 1);" +
+                    "MERGE INTO USERTOROLE (USERID, ROLEID, ID) VALUES(1, 2, 2);" +
+                    "MERGE INTO USERTOROLE (USERID, ROLEID, ID) VALUES(2, 2, 3);" +
                     "MERGE INTO USERTOROLE (USERID, ROLEID, ID) VALUES(3, 2, 4);";
             Factory.getConnection().prepareStatement(user1).execute();
             Factory.getConnection().prepareStatement(user2).execute();
@@ -67,10 +66,10 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     public User getUser(User user) {
-        String preparedQuery = "SELECT  U.ID, U.USERNAME, U.PASSWORD, U.TOKEN, U.EMAIL, R.NAME FROM USERS AS U\n" +
-                "JOIN USERTOROLE AS UR ON UR.USERID=U.ID\n" +
-                "JOIN ROLES AS R ON R.ID = UR.ROLEID\n" +
-                "WHERE U.USERNAME = ? AND U.PASSWORD = ?;";
+        String preparedQuery = "SELECT  U.ID, U.USERNAME, U.PASSWORD, U.TOKEN, U.EMAIL, R.NAME FROM USERS AS U" +
+                " JOIN USERTOROLE AS UR ON UR.USERID=U.ID" +
+                " JOIN ROLES AS R ON R.ID = UR.ROLEID" +
+                " WHERE U.USERNAME = ? AND U.PASSWORD = ?;";
         Set<Roles> roles = new HashSet<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(preparedQuery)) {
             preparedStatement.setString(1, user.getName());
@@ -91,11 +90,11 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public User findByToken(String token) {
-        String preparedQuery = "SELECT  U.ID, U.USERNAME, U.PASSWORD, U.TOKEN, U.EMAIL, R.NAME " +
-                "FROM USERS U " +
-                "JOIN USERTOROLE UR ON UR.USERID=U.ID " +
-                "JOIN ROLES R ON R.ID = UR.ROLEID " +
-                "WHERE U.TOKEN = ?;";
+        String preparedQuery = "SELECT  U.ID, U.USERNAME, U.PASSWORD, U.TOKEN, U.EMAIL, R.NAME" +
+                " FROM USERS U" +
+                " JOIN USERTOROLE UR ON UR.USERID=U.ID" +
+                " JOIN ROLES R ON R.ID = UR.ROLEID" +
+                " WHERE U.TOKEN = ?;";
         Set<Roles> roles = new HashSet<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(preparedQuery)) {
             preparedStatement.setString(1, token);
@@ -153,11 +152,11 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public User update(User user) {
-        String findUserByToken = "UPDATE USERS SET " +
-                "PASSWORD = ?," +
-                "EMAIL = ?," +
-                "ADMIN = ?" +
-                "WHERE USERNAME = ?;";
+        String findUserByToken = "UPDATE USERS SET" +
+                " PASSWORD = ?," +
+                " EMAIL = ?," +
+                " ADMIN = ?" +
+                " WHERE USERNAME = ?;";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(findUserByToken);
@@ -175,43 +174,26 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public Set<User> getAll() {
-        // TODO fix getting all users
-        String preparedQuery = "SELECT  U.ID, U.USERNAME, U.PASSWORD, U.TOKEN, U.EMAIL, R.NAME FROM USERS AS U\n" +
-                "JOIN USERTOROLE AS UR ON UR.USERID=U.ID\n" +
-                "JOIN ROLES AS R ON R.ID = UR.ROLEID;";
+        String preparedQuery = "SELECT U.ID, U.USERNAME, U.PASSWORD, U.TOKEN, U.EMAIL, R.NAME FROM USERS AS U" +
+                " JOIN USERTOROLE AS UR ON UR.USERID=U.ID" +
+                " JOIN ROLES AS R ON R.ID = UR.ROLEID;";
         Set<User> resultSet = new HashSet<>();
-        final User[] resultUser = new User[1];
         try (PreparedStatement preparedStatement = connection.prepareStatement(preparedQuery)) {
             ResultSet rs = preparedStatement.executeQuery();
-            Stream.of(rs).forEach(c -> {
-                try {
-                    while (rs.next()) {
-                        resultUser[0] = new User(rs.getString("USERNAME"), rs.getString("PASSWORD"));
-                        resultUser[0].setId(rs.getLong("ID"));
-                        resultUser[0].setEmail(rs.getString("EMAIL"));
-                        resultUser[0].setToken(rs.getString("TOKEN"));
-                        if (resultSet.contains(resultUser[0])) {
-                            resultSet.stream().filter(p -> p.getName().equals(resultUser[0].getName())).findFirst().
-                                    get().getRoles().add(Roles.valueOf(rs.getString("NAME")));
-
-                        } else {
-                            Set<Roles> roles = new HashSet<>();
-                            roles.add(Roles.valueOf(rs.getString("NAME")));
-                            resultUser[0].setRoles(roles);
-                        }
-                        resultSet.add(resultUser[0]);
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException("There are problems with getting users" + e);
+            while (rs.next()) {
+                User user = new User(rs.getString("USERNAME"), rs.getString("PASSWORD"));
+                if (resultSet.contains(user)) {
+                    resultSet.stream().filter(u -> u.equals(user)).findFirst().get().getRoles().add(Roles.valueOf(rs.
+                            getString("NAME")));
+                    resultSet.add(user);
+                } else {
+                    user.setId(rs.getLong("ID"));
+                    user.setEmail(rs.getString("EMAIL"));
+                    user.setToken(rs.getString("TOKEN"));
+                    user.getRoles().add(Roles.valueOf(rs.getString("NAME")));
+                    resultSet.add(user);
                 }
-            });
-//            rs.next();
-//            User resultUser = new User(rs.getString("USERNAME"), rs.getString("PASSWORD"));
-//            resultUser.setId(rs.getLong("ID"));
-//            resultUser.setEmail(rs.getString("EMAIL"));
-//            resultUser.setToken(rs.getString("TOKEN"));
-//            resultUser.setRoles(roles);
-//            roles.addAll(getUserRolesFromQuery(rs));
+            }
             return resultSet;
         } catch (SQLException e) {
             throw new RuntimeException("There are problems with getting users" + e);
@@ -221,17 +203,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     private Set<Roles> getUserRolesFromQuery(ResultSet rs) throws SQLException {
         Set<Roles> roles = new HashSet<>();
         roles.add(Roles.valueOf(rs.getString("NAME")));
-        roles.addAll(Stream.of(rs).map(f -> {
-            try {
-                if (f.next()) {
-                    return Roles.valueOf(rs.getString("NAME"));
-                } else {
-                    return null;
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException("There are problems with getting users" + e);
+        try {
+            while (rs.next()) {
+                roles.add(Roles.valueOf(rs.getString("NAME")));
             }
-        }).collect(Collectors.toSet()));
+        } catch (SQLException e) {
+            throw new RuntimeException("There are problems with getting users" + e);
+        }
         return roles;
     }
 

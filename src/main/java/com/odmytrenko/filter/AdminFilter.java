@@ -39,9 +39,7 @@ public class AdminFilter implements Filter {
             if (Arrays.stream(cookies).anyMatch(p -> p.getName().equals("token"))) {
                 User user = userDao.findByToken(Arrays.stream(cookies).filter(p -> p.getName().equals("token")).
                         findFirst().get().getValue());
-                if (user.getRoles().contains(Roles.ADMIN)) {
-                    request.getRequestDispatcher("/WEB-INF/views/adminconsole.jsp").forward(request, response);
-                } else {
+                if (!user.getRoles().contains(Roles.ADMIN)) {
                     throw new RuntimeException("User doesn't have privileges to enter this page");
                 }
             } else {
