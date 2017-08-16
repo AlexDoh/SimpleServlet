@@ -136,14 +136,16 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public User delete(User user) {
-        String deleteUser = "DELETE FROM USERS WHERE USERNAME = ?";
+        String deleteUserRoleQuery = "DELETE FROM USERTOROLE WHERE USERID = (SELECT ID FROM USERS WHERE USERNAME = ?);";
+        String deleteUserQuery = "DELETE FROM USERS WHERE USERNAME = ?;";
 
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(deleteUser);
+        try (PreparedStatement preparedStatementForRole = connection.prepareStatement(deleteUserRoleQuery);
+             PreparedStatement preparedStatementForUser = connection.prepareStatement(deleteUserQuery)) {
 
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.execute();
-            preparedStatement.close();
+            preparedStatementForRole.setString(1, user.getName());
+            preparedStatementForUser.setString(1, user.getName());
+            preparedStatementForRole.execute();
+            preparedStatementForUser.execute();
             return user;
         } catch (SQLException e) {
             throw new RuntimeException("There is no such user");
@@ -152,20 +154,29 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public User update(User user) {
-        String findUserByToken = "UPDATE USERS SET" +
-                " PASSWORD = ?," +
-                " EMAIL = ?," +
-                " ADMIN = ?" +
-                " WHERE USERNAME = ?;";
+        String updateUserQuery = "UPDATE USERS SET PASSWORD = ?, EMAIL = ? WHERE USERNAME = ?;";
+        String deleteUserRoleQuery = "DELETE FROM USERTOROLE WHERE USERID = (SELECT ID FROM USERS WHERE USERNAME = ?);";
+        String insertUserRoleQuery = "INSERT INTO USERTOROLE (USERID, ROLEID) VALUES((SELECT ID FROM USERS WHERE USERNAME = ?), (SELECT ID FROM ROLES WHERE NAME = ?));";
 
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(findUserByToken);
+        try (PreparedStatement preparedStatementForUser = connection.prepareStatement(updateUserQuery);
+             PreparedStatement preparedStatementForDeleteRole = connection.prepareStatement(deleteUserRoleQuery);
+             PreparedStatement preparedStatementForUpdateRole = connection.prepareStatement(insertUserRoleQuery)) {
 
-            preparedStatement.setString(1, user.getPassword());
-            preparedStatement.setString(2, user.getEmail());
-            preparedStatement.setString(4, user.getName());
-            preparedStatement.execute();
-            preparedStatement.close();
+            preparedStatementForUser.setString(1, user.getPassword());
+            preparedStatementForUser.setString(2, user.getEmail());
+            preparedStatementForUser.setString(3, user.getName());
+            preparedStatementForDeleteRole.setString(1, user.getName());
+            preparedStatementForUser.execute();
+            preparedStatementForDeleteRole.execute();
+
+            user.getRoles().stream().map(Enum::toString).forEach(c -> {
+                try {
+                    preparedStatementForUpdateRole.setString(1, user.getName());
+                    preparedStatementForUpdateRole.setString(2, c);
+                    preparedStatementForUpdateRole.execute();
+                } catch (SQLException ignored) {
+                }
+            });
             return user;
         } catch (SQLException e) {
             throw new RuntimeException("There is no such user");

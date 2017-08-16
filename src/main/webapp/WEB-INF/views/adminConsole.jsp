@@ -9,7 +9,7 @@
 <a href="${pageContext.request.contextPath}/filter/adminconsole/usermanagement"
    style="position: relative;bottom: -5px;"><h3>User management</h3></a><br>
 <h3>Category manipulation:</h3>
-<form method="POST" action="<c:url value="/filter/performedaction"/>" id="category">
+<form method="post" action="<c:url value="/filter/performedaction"/>" id="category">
     <input type="hidden" name="type" value="Category"/>
     <ul style="list-style: none">
         <li>Category action:
@@ -26,7 +26,7 @@
     <input type="submit" value="Submit" style="position: relative;bottom: 20px">
 </form>
 <h3>Product manipulation:</h3>
-<form method="POST" action="<c:url value="/filter/performedaction"/>" id="product">
+<form method="post" action="<c:url value="/filter/performedaction"/>" id="product">
     <input type="hidden" name="type" value="Product"/>
     <ul style="list-style: none">
         <li>Choose product operation:
@@ -36,11 +36,11 @@
                 <option value="delete">Delete</option>
             </select>
         </li>
-        <li>Product name:
+        <li style="position: relative;bottom: -5px">Product name:
             <input title="Product name" type="text" name="productName"></li>
-        <li>Product description:
+        <li style="position: relative;bottom: -10px">Product description:
             <input title="Product description" type="text" name="productDescription"></li>
-        <li>Category name for product:
+        <li style="position: relative;bottom: -15px">Category name for product:
             <select title="Product categoryName" name="productCategoryName" form="product">
                 <c:forEach var="c" items="${categories}">
                     <option value="${c.name}">
@@ -51,8 +51,8 @@
         </li>
     </ul>
     <br>
-    <input type="submit" value="Submit" style="position: relative;bottom: 20px">
+    <input type="submit" value="Submit" style="position: relative;bottom: 5px">
 </form>
-<a href="${pageContext.request.contextPath}/filter/" style="position: relative;bottom: -40px;">Back</a><br>
+<a href="${pageContext.request.contextPath}/filter/" style="position: relative;bottom: -35px;">Back</a><br>
 </body>
 </html>

@@ -10,13 +10,14 @@
     <p>
     <h4 style="display:inline-block;margin-right:5px">Account name: </h4>
     <h3 style="display:inline-block;margin-right:5px"><i><c:out value="${u.name}"/></i></h3>
-    <form id="edit" action="<c:url value="/filter/adminconsole/manageuser"/>"
+    <form method="post" id="edit" action="<c:url value="/filter/adminconsole/manageuser"/>"
           style="display:inline-block;margin-right:10px">
-        <button name="name" title="Edit user" form="edit" value="<c:out value="${u.name}"/>">Edit</button>
+        <input type="hidden" name="password" value="${u.password}"/>
+        <button name="userName" title="Edit user" form="edit" value="<c:out value="${u.name}"/>">Edit</button>
     </form>
-    <form id="delete" action="<c:url value="/filter/adminconsole/deleteuser"/>"
+    <form method="post" id="delete" action="<c:url value="/filter/adminconsole/deleteuser"/>"
           style="display:inline-block;margin-right:10px">
-        <button name="name" title="Delete user" form="delete" value="<c:out value="${u.name}"/>">Delete</button>
+        <button name="userName" title="Delete user" form="delete" value="<c:out value="${u.name}"/>">Delete</button>
     </form>
     </p>
 </c:forEach>

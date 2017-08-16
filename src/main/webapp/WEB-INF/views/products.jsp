@@ -5,7 +5,7 @@
     <title>Products</title>
 </head>
 <body>
-<form method="POST" action="<c:url value="/filter/product"/>">
+<form method="post" action="<c:url value="/filter/product"/>">
     Find product by id:
     <input title="Find product by id:" type="text" name="id" style="position: relative;top: -5px"><br>
     Category of product:

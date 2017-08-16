@@ -20,8 +20,16 @@ import java.sql.SQLException;
 
 public class Factory {
 
-    public static Controller getUserManagement() {
-        return new UserManagementController(Factory.getUserService());
+    public static Controller getUserEditController() {
+        return new UserEditController(Factory.getUserService());
+    }
+
+    public static Controller getUserDeleteController() {
+        return new UserDeleteController();
+    }
+
+    public static Controller getAllUsersController() {
+        return new GetAllUsersController(Factory.getUserService());
     }
 
     public static Controller getImageUploadController() {

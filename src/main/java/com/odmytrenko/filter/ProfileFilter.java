@@ -53,7 +53,9 @@ public class ProfileFilter implements Filter {
                 }
             });
         }
-        chain.doFilter(request, response);
+        if (request.getAttribute("user") == null) {
+            chain.doFilter(request, response);
+        }
     }
 
     @Override

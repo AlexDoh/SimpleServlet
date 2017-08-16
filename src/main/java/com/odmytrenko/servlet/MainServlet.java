@@ -30,6 +30,7 @@ public class MainServlet extends HttpServlet {
         controllerMap.put(Request.create("GET", "/filter/registration"), Factory.getRegistrationController());
         controllerMap.put(Request.create("GET", "/filter/profile"), Factory.getLoginController());
         controllerMap.put(Request.create("POST", "/filter/profile"), Factory.getProfileController());
+        controllerMap.put(Request.create("POST", "/filter/profile/imageupload"), Factory.getImageUploadController());
         controllerMap.put(Request.create("GET", "/filter/categories"), Factory.getAllCategoriesController());
         controllerMap.put(Request.create("GET", "/filter/products"), Factory.getAllProductsController());
         controllerMap.put(Request.create("GET", "/filter/category"), Factory.getCategoryController());
@@ -37,9 +38,10 @@ public class MainServlet extends HttpServlet {
         controllerMap.put(Request.create("GET", "/filter/product"), Factory.getProductController());
         controllerMap.put(Request.create("POST", "/filter/product"), Factory.getProductController());
         controllerMap.put(Request.create("GET", "/filter/adminconsole"), Factory.getAdminController());
-        controllerMap.put(Request.create("POST", "/filter/performedaction"), Factory.getManipulationController());
-        controllerMap.put(Request.create("POST", "/filter/profile/imageupload"), Factory.getImageUploadController());
-        controllerMap.put(Request.create("GET", "/filter/adminconsole/usermanagement"), Factory.getUserManagement());
+        controllerMap.put(Request.create("POST", "/filter/adminconsole/performedaction"), Factory.getManipulationController());
+        controllerMap.put(Request.create("GET", "/filter/adminconsole/usermanagement"), Factory.getAllUsersController());
+        controllerMap.put(Request.create("POST", "/filter/adminconsole/manageuser"), Factory.getUserEditController());
+        controllerMap.put(Request.create("POST", "/filter/adminconsole/deleteuser"), Factory.getUserDeleteController());
     }
 
     @Override

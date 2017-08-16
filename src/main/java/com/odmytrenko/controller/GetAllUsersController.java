@@ -4,11 +4,11 @@ import com.odmytrenko.service.UserService;
 import com.odmytrenko.servlet.Request;
 import com.odmytrenko.servlet.ViewModel;
 
-public class UserManagementController implements Controller {
+public class GetAllUsersController implements Controller {
 
     private UserService userService;
 
-    public UserManagementController(UserService userService) {
+    public GetAllUsersController(UserService userService) {
         this.userService = userService;
     }
 

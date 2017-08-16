@@ -5,7 +5,7 @@
     <title>Login</title>
 </head>
 <body>
-<form method="POST" action="<c:url value="/filter/profile"/>">
+<form method="post" action="<c:url value="/filter/profile"/>">
     Username:
     <input title="Username" type="text" name="userName" style="position: relative;top: -5px"><br>
     Password:

@@ -10,14 +10,6 @@ import java.util.Map;
 
 public class Request {
 
-    public String getMethod() {
-        return method;
-    }
-
-    public String getUri() {
-        return uri;
-    }
-
     private final String method;
     private final String uri;
     private final Map<String, String[]> parameters = new HashMap<>();
@@ -45,8 +37,16 @@ public class Request {
         return parameters.get(param)[0];
     }
 
+    public String[] getParametersArray(String param) {
+        return parameters.get(param);
+    }
+
     public void setParameter(String param, String[] objects) {
         parameters.put(param, objects);
+    }
+
+    public boolean hasParameter(String param) {
+        return parameters.containsKey(param);
     }
 
     public List<FileItem> getItemsForUpload() {
@@ -55,6 +55,14 @@ public class Request {
 
     public void setItemsForUpload(List<FileItem> itemsForUpload) {
         this.itemsForUpload = itemsForUpload;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public String getUri() {
+        return uri;
     }
 
     @Override

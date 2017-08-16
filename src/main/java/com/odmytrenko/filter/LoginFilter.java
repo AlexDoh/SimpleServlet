@@ -41,6 +41,7 @@ public class LoginFilter implements Filter {
                 if (user != null) {
                     request.setAttribute("user", user);
                     request.getRequestDispatcher("/WEB-INF/views/profile.jsp").forward(request, response);
+                    return;
                 }
             }
         }

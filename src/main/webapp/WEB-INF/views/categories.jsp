@@ -5,7 +5,7 @@
     <title>Categories</title>
 </head>
 <body>
-<form method="POST" action="<c:url value="/filter/category"/>">
+<form method="post" action="<c:url value="/filter/category"/>">
     Find category by id:<br>
     <input type="text" name="id"><br>
     <input type="submit" value="Submit">
